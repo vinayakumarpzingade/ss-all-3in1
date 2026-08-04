@@ -10,33 +10,317 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedCollegeRouteImport } from './routes/_authenticated/college'
+import { Route as AuthenticatedStudentRouteImport } from './routes/_authenticated/student'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminCollegesRouteImport } from './routes/_authenticated/admin.colleges'
+import { Route as AuthenticatedAdminMocksRouteImport } from './routes/_authenticated/admin.mocks'
+import { Route as AuthenticatedAdminPathsRouteImport } from './routes/_authenticated/admin.paths'
+import { Route as AuthenticatedAdminSubmissionsRouteImport } from './routes/_authenticated/admin.submissions'
+import { Route as AuthenticatedCollegeIndexRouteImport } from './routes/_authenticated/college.index'
+import { Route as AuthenticatedCollegeAnalyticsRouteImport } from './routes/_authenticated/college.analytics'
+import { Route as AuthenticatedCollegeReportsRouteImport } from './routes/_authenticated/college.reports'
+import { Route as AuthenticatedCollegeStudentsRouteImport } from './routes/_authenticated/college.students'
+import { Route as AuthenticatedStudentIndexRouteImport } from './routes/_authenticated/student.index'
+import { Route as AuthenticatedStudentCertificatesRouteImport } from './routes/_authenticated/student.certificates'
+import { Route as AuthenticatedStudentMocksRouteImport } from './routes/_authenticated/student.mocks'
+import { Route as AuthenticatedStudentPathRouteImport } from './routes/_authenticated/student.path'
+import { Route as AuthenticatedStudentProjectsRouteImport } from './routes/_authenticated/student.projects'
+import { Route as ApiPublicSeedRouteImport } from './routes/api/public/seed'
+import { Route as AuthenticatedAdminPathsIndexRouteImport } from './routes/_authenticated/admin.paths.index'
+import { Route as AuthenticatedAdminPathsPathIdRouteImport } from './routes/_authenticated/admin.paths.$pathId'
+import { Route as AuthenticatedStudentWeekWeekIdRouteImport } from './routes/_authenticated/student.week.$weekId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCollegeRoute = AuthenticatedCollegeRouteImport.update({
+  id: '/college',
+  path: '/college',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedStudentRoute = AuthenticatedStudentRouteImport.update({
+  id: '/student',
+  path: '/student',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedAdminCollegesRoute =
+  AuthenticatedAdminCollegesRouteImport.update({
+    id: '/colleges',
+    path: '/colleges',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminMocksRoute = AuthenticatedAdminMocksRouteImport.update({
+  id: '/mocks',
+  path: '/mocks',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedAdminPathsRoute = AuthenticatedAdminPathsRouteImport.update({
+  id: '/paths',
+  path: '/paths',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedAdminSubmissionsRoute =
+  AuthenticatedAdminSubmissionsRouteImport.update({
+    id: '/submissions',
+    path: '/submissions',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedCollegeIndexRoute =
+  AuthenticatedCollegeIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedCollegeRoute,
+  } as any)
+const AuthenticatedCollegeAnalyticsRoute =
+  AuthenticatedCollegeAnalyticsRouteImport.update({
+    id: '/analytics',
+    path: '/analytics',
+    getParentRoute: () => AuthenticatedCollegeRoute,
+  } as any)
+const AuthenticatedCollegeReportsRoute =
+  AuthenticatedCollegeReportsRouteImport.update({
+    id: '/reports',
+    path: '/reports',
+    getParentRoute: () => AuthenticatedCollegeRoute,
+  } as any)
+const AuthenticatedCollegeStudentsRoute =
+  AuthenticatedCollegeStudentsRouteImport.update({
+    id: '/students',
+    path: '/students',
+    getParentRoute: () => AuthenticatedCollegeRoute,
+  } as any)
+const AuthenticatedStudentIndexRoute =
+  AuthenticatedStudentIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedStudentRoute,
+  } as any)
+const AuthenticatedStudentCertificatesRoute =
+  AuthenticatedStudentCertificatesRouteImport.update({
+    id: '/certificates',
+    path: '/certificates',
+    getParentRoute: () => AuthenticatedStudentRoute,
+  } as any)
+const AuthenticatedStudentMocksRoute =
+  AuthenticatedStudentMocksRouteImport.update({
+    id: '/mocks',
+    path: '/mocks',
+    getParentRoute: () => AuthenticatedStudentRoute,
+  } as any)
+const AuthenticatedStudentPathRoute =
+  AuthenticatedStudentPathRouteImport.update({
+    id: '/path',
+    path: '/path',
+    getParentRoute: () => AuthenticatedStudentRoute,
+  } as any)
+const AuthenticatedStudentProjectsRoute =
+  AuthenticatedStudentProjectsRouteImport.update({
+    id: '/projects',
+    path: '/projects',
+    getParentRoute: () => AuthenticatedStudentRoute,
+  } as any)
+const ApiPublicSeedRoute = ApiPublicSeedRouteImport.update({
+  id: '/api/public/seed',
+  path: '/api/public/seed',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminPathsIndexRoute =
+  AuthenticatedAdminPathsIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedAdminPathsRoute,
+  } as any)
+const AuthenticatedAdminPathsPathIdRoute =
+  AuthenticatedAdminPathsPathIdRouteImport.update({
+    id: '/$pathId',
+    path: '/$pathId',
+    getParentRoute: () => AuthenticatedAdminPathsRoute,
+  } as any)
+const AuthenticatedStudentWeekWeekIdRoute =
+  AuthenticatedStudentWeekWeekIdRouteImport.update({
+    id: '/week/$weekId',
+    path: '/week/$weekId',
+    getParentRoute: () => AuthenticatedStudentRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/college': typeof AuthenticatedCollegeRouteWithChildren
+  '/student': typeof AuthenticatedStudentRouteWithChildren
+  '/admin/colleges': typeof AuthenticatedAdminCollegesRoute
+  '/admin/mocks': typeof AuthenticatedAdminMocksRoute
+  '/admin/paths': typeof AuthenticatedAdminPathsRouteWithChildren
+  '/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
+  '/college/analytics': typeof AuthenticatedCollegeAnalyticsRoute
+  '/college/reports': typeof AuthenticatedCollegeReportsRoute
+  '/college/students': typeof AuthenticatedCollegeStudentsRoute
+  '/student/certificates': typeof AuthenticatedStudentCertificatesRoute
+  '/student/mocks': typeof AuthenticatedStudentMocksRoute
+  '/student/path': typeof AuthenticatedStudentPathRoute
+  '/student/projects': typeof AuthenticatedStudentProjectsRoute
+  '/api/public/seed': typeof ApiPublicSeedRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/college/': typeof AuthenticatedCollegeIndexRoute
+  '/student/': typeof AuthenticatedStudentIndexRoute
+  '/admin/paths/$pathId': typeof AuthenticatedAdminPathsPathIdRoute
+  '/student/week/$weekId': typeof AuthenticatedStudentWeekWeekIdRoute
+  '/admin/paths/': typeof AuthenticatedAdminPathsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/admin/colleges': typeof AuthenticatedAdminCollegesRoute
+  '/admin/mocks': typeof AuthenticatedAdminMocksRoute
+  '/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
+  '/college/analytics': typeof AuthenticatedCollegeAnalyticsRoute
+  '/college/reports': typeof AuthenticatedCollegeReportsRoute
+  '/college/students': typeof AuthenticatedCollegeStudentsRoute
+  '/student/certificates': typeof AuthenticatedStudentCertificatesRoute
+  '/student/mocks': typeof AuthenticatedStudentMocksRoute
+  '/student/path': typeof AuthenticatedStudentPathRoute
+  '/student/projects': typeof AuthenticatedStudentProjectsRoute
+  '/api/public/seed': typeof ApiPublicSeedRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
+  '/college': typeof AuthenticatedCollegeIndexRoute
+  '/student': typeof AuthenticatedStudentIndexRoute
+  '/admin/paths/$pathId': typeof AuthenticatedAdminPathsPathIdRoute
+  '/student/week/$weekId': typeof AuthenticatedStudentWeekWeekIdRoute
+  '/admin/paths': typeof AuthenticatedAdminPathsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/_authenticated/college': typeof AuthenticatedCollegeRouteWithChildren
+  '/_authenticated/student': typeof AuthenticatedStudentRouteWithChildren
+  '/_authenticated/admin/colleges': typeof AuthenticatedAdminCollegesRoute
+  '/_authenticated/admin/mocks': typeof AuthenticatedAdminMocksRoute
+  '/_authenticated/admin/paths': typeof AuthenticatedAdminPathsRouteWithChildren
+  '/_authenticated/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
+  '/_authenticated/college/analytics': typeof AuthenticatedCollegeAnalyticsRoute
+  '/_authenticated/college/reports': typeof AuthenticatedCollegeReportsRoute
+  '/_authenticated/college/students': typeof AuthenticatedCollegeStudentsRoute
+  '/_authenticated/student/certificates': typeof AuthenticatedStudentCertificatesRoute
+  '/_authenticated/student/mocks': typeof AuthenticatedStudentMocksRoute
+  '/_authenticated/student/path': typeof AuthenticatedStudentPathRoute
+  '/_authenticated/student/projects': typeof AuthenticatedStudentProjectsRoute
+  '/api/public/seed': typeof ApiPublicSeedRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/college/': typeof AuthenticatedCollegeIndexRoute
+  '/_authenticated/student/': typeof AuthenticatedStudentIndexRoute
+  '/_authenticated/admin/paths/$pathId': typeof AuthenticatedAdminPathsPathIdRoute
+  '/_authenticated/student/week/$weekId': typeof AuthenticatedStudentWeekWeekIdRoute
+  '/_authenticated/admin/paths/': typeof AuthenticatedAdminPathsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/admin'
+    | '/college'
+    | '/student'
+    | '/admin/colleges'
+    | '/admin/mocks'
+    | '/admin/paths'
+    | '/admin/submissions'
+    | '/college/analytics'
+    | '/college/reports'
+    | '/college/students'
+    | '/student/certificates'
+    | '/student/mocks'
+    | '/student/path'
+    | '/student/projects'
+    | '/api/public/seed'
+    | '/admin/'
+    | '/college/'
+    | '/student/'
+    | '/admin/paths/$pathId'
+    | '/student/week/$weekId'
+    | '/admin/paths/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/admin/colleges'
+    | '/admin/mocks'
+    | '/admin/submissions'
+    | '/college/analytics'
+    | '/college/reports'
+    | '/college/students'
+    | '/student/certificates'
+    | '/student/mocks'
+    | '/student/path'
+    | '/student/projects'
+    | '/api/public/seed'
+    | '/admin'
+    | '/college'
+    | '/student'
+    | '/admin/paths/$pathId'
+    | '/student/week/$weekId'
+    | '/admin/paths'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/admin'
+    | '/_authenticated/college'
+    | '/_authenticated/student'
+    | '/_authenticated/admin/colleges'
+    | '/_authenticated/admin/mocks'
+    | '/_authenticated/admin/paths'
+    | '/_authenticated/admin/submissions'
+    | '/_authenticated/college/analytics'
+    | '/_authenticated/college/reports'
+    | '/_authenticated/college/students'
+    | '/_authenticated/student/certificates'
+    | '/_authenticated/student/mocks'
+    | '/_authenticated/student/path'
+    | '/_authenticated/student/projects'
+    | '/api/public/seed'
+    | '/_authenticated/admin/'
+    | '/_authenticated/college/'
+    | '/_authenticated/student/'
+    | '/_authenticated/admin/paths/$pathId'
+    | '/_authenticated/student/week/$weekId'
+    | '/_authenticated/admin/paths/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ApiPublicSeedRoute: typeof ApiPublicSeedRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +332,264 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/college': {
+      id: '/_authenticated/college'
+      path: '/college'
+      fullPath: '/college'
+      preLoaderRoute: typeof AuthenticatedCollegeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/student': {
+      id: '/_authenticated/student'
+      path: '/student'
+      fullPath: '/student'
+      preLoaderRoute: typeof AuthenticatedStudentRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/colleges': {
+      id: '/_authenticated/admin/colleges'
+      path: '/colleges'
+      fullPath: '/admin/colleges'
+      preLoaderRoute: typeof AuthenticatedAdminCollegesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/mocks': {
+      id: '/_authenticated/admin/mocks'
+      path: '/mocks'
+      fullPath: '/admin/mocks'
+      preLoaderRoute: typeof AuthenticatedAdminMocksRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/paths': {
+      id: '/_authenticated/admin/paths'
+      path: '/paths'
+      fullPath: '/admin/paths'
+      preLoaderRoute: typeof AuthenticatedAdminPathsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/submissions': {
+      id: '/_authenticated/admin/submissions'
+      path: '/submissions'
+      fullPath: '/admin/submissions'
+      preLoaderRoute: typeof AuthenticatedAdminSubmissionsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/college/': {
+      id: '/_authenticated/college/'
+      path: '/'
+      fullPath: '/college/'
+      preLoaderRoute: typeof AuthenticatedCollegeIndexRouteImport
+      parentRoute: typeof AuthenticatedCollegeRoute
+    }
+    '/_authenticated/college/analytics': {
+      id: '/_authenticated/college/analytics'
+      path: '/analytics'
+      fullPath: '/college/analytics'
+      preLoaderRoute: typeof AuthenticatedCollegeAnalyticsRouteImport
+      parentRoute: typeof AuthenticatedCollegeRoute
+    }
+    '/_authenticated/college/reports': {
+      id: '/_authenticated/college/reports'
+      path: '/reports'
+      fullPath: '/college/reports'
+      preLoaderRoute: typeof AuthenticatedCollegeReportsRouteImport
+      parentRoute: typeof AuthenticatedCollegeRoute
+    }
+    '/_authenticated/college/students': {
+      id: '/_authenticated/college/students'
+      path: '/students'
+      fullPath: '/college/students'
+      preLoaderRoute: typeof AuthenticatedCollegeStudentsRouteImport
+      parentRoute: typeof AuthenticatedCollegeRoute
+    }
+    '/_authenticated/student/': {
+      id: '/_authenticated/student/'
+      path: '/'
+      fullPath: '/student/'
+      preLoaderRoute: typeof AuthenticatedStudentIndexRouteImport
+      parentRoute: typeof AuthenticatedStudentRoute
+    }
+    '/_authenticated/student/certificates': {
+      id: '/_authenticated/student/certificates'
+      path: '/certificates'
+      fullPath: '/student/certificates'
+      preLoaderRoute: typeof AuthenticatedStudentCertificatesRouteImport
+      parentRoute: typeof AuthenticatedStudentRoute
+    }
+    '/_authenticated/student/mocks': {
+      id: '/_authenticated/student/mocks'
+      path: '/mocks'
+      fullPath: '/student/mocks'
+      preLoaderRoute: typeof AuthenticatedStudentMocksRouteImport
+      parentRoute: typeof AuthenticatedStudentRoute
+    }
+    '/_authenticated/student/path': {
+      id: '/_authenticated/student/path'
+      path: '/path'
+      fullPath: '/student/path'
+      preLoaderRoute: typeof AuthenticatedStudentPathRouteImport
+      parentRoute: typeof AuthenticatedStudentRoute
+    }
+    '/_authenticated/student/projects': {
+      id: '/_authenticated/student/projects'
+      path: '/projects'
+      fullPath: '/student/projects'
+      preLoaderRoute: typeof AuthenticatedStudentProjectsRouteImport
+      parentRoute: typeof AuthenticatedStudentRoute
+    }
+    '/api/public/seed': {
+      id: '/api/public/seed'
+      path: '/api/public/seed'
+      fullPath: '/api/public/seed'
+      preLoaderRoute: typeof ApiPublicSeedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin/paths/': {
+      id: '/_authenticated/admin/paths/'
+      path: '/'
+      fullPath: '/admin/paths/'
+      preLoaderRoute: typeof AuthenticatedAdminPathsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminPathsRoute
+    }
+    '/_authenticated/admin/paths/$pathId': {
+      id: '/_authenticated/admin/paths/$pathId'
+      path: '/$pathId'
+      fullPath: '/admin/paths/$pathId'
+      preLoaderRoute: typeof AuthenticatedAdminPathsPathIdRouteImport
+      parentRoute: typeof AuthenticatedAdminPathsRoute
+    }
+    '/_authenticated/student/week/$weekId': {
+      id: '/_authenticated/student/week/$weekId'
+      path: '/week/$weekId'
+      fullPath: '/student/week/$weekId'
+      preLoaderRoute: typeof AuthenticatedStudentWeekWeekIdRouteImport
+      parentRoute: typeof AuthenticatedStudentRoute
+    }
   }
 }
 
+interface AuthenticatedAdminPathsRouteChildren {
+  AuthenticatedAdminPathsPathIdRoute: typeof AuthenticatedAdminPathsPathIdRoute
+  AuthenticatedAdminPathsIndexRoute: typeof AuthenticatedAdminPathsIndexRoute
+}
+
+const AuthenticatedAdminPathsRouteChildren: AuthenticatedAdminPathsRouteChildren =
+  {
+    AuthenticatedAdminPathsPathIdRoute: AuthenticatedAdminPathsPathIdRoute,
+    AuthenticatedAdminPathsIndexRoute: AuthenticatedAdminPathsIndexRoute,
+  }
+
+const AuthenticatedAdminPathsRouteWithChildren =
+  AuthenticatedAdminPathsRoute._addFileChildren(
+    AuthenticatedAdminPathsRouteChildren,
+  )
+
+interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminCollegesRoute: typeof AuthenticatedAdminCollegesRoute
+  AuthenticatedAdminMocksRoute: typeof AuthenticatedAdminMocksRoute
+  AuthenticatedAdminPathsRoute: typeof AuthenticatedAdminPathsRouteWithChildren
+  AuthenticatedAdminSubmissionsRoute: typeof AuthenticatedAdminSubmissionsRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+}
+
+const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminCollegesRoute: AuthenticatedAdminCollegesRoute,
+  AuthenticatedAdminMocksRoute: AuthenticatedAdminMocksRoute,
+  AuthenticatedAdminPathsRoute: AuthenticatedAdminPathsRouteWithChildren,
+  AuthenticatedAdminSubmissionsRoute: AuthenticatedAdminSubmissionsRoute,
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+}
+
+const AuthenticatedAdminRouteWithChildren =
+  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
+
+interface AuthenticatedCollegeRouteChildren {
+  AuthenticatedCollegeAnalyticsRoute: typeof AuthenticatedCollegeAnalyticsRoute
+  AuthenticatedCollegeReportsRoute: typeof AuthenticatedCollegeReportsRoute
+  AuthenticatedCollegeStudentsRoute: typeof AuthenticatedCollegeStudentsRoute
+  AuthenticatedCollegeIndexRoute: typeof AuthenticatedCollegeIndexRoute
+}
+
+const AuthenticatedCollegeRouteChildren: AuthenticatedCollegeRouteChildren = {
+  AuthenticatedCollegeAnalyticsRoute: AuthenticatedCollegeAnalyticsRoute,
+  AuthenticatedCollegeReportsRoute: AuthenticatedCollegeReportsRoute,
+  AuthenticatedCollegeStudentsRoute: AuthenticatedCollegeStudentsRoute,
+  AuthenticatedCollegeIndexRoute: AuthenticatedCollegeIndexRoute,
+}
+
+const AuthenticatedCollegeRouteWithChildren =
+  AuthenticatedCollegeRoute._addFileChildren(AuthenticatedCollegeRouteChildren)
+
+interface AuthenticatedStudentRouteChildren {
+  AuthenticatedStudentCertificatesRoute: typeof AuthenticatedStudentCertificatesRoute
+  AuthenticatedStudentMocksRoute: typeof AuthenticatedStudentMocksRoute
+  AuthenticatedStudentPathRoute: typeof AuthenticatedStudentPathRoute
+  AuthenticatedStudentProjectsRoute: typeof AuthenticatedStudentProjectsRoute
+  AuthenticatedStudentIndexRoute: typeof AuthenticatedStudentIndexRoute
+  AuthenticatedStudentWeekWeekIdRoute: typeof AuthenticatedStudentWeekWeekIdRoute
+}
+
+const AuthenticatedStudentRouteChildren: AuthenticatedStudentRouteChildren = {
+  AuthenticatedStudentCertificatesRoute: AuthenticatedStudentCertificatesRoute,
+  AuthenticatedStudentMocksRoute: AuthenticatedStudentMocksRoute,
+  AuthenticatedStudentPathRoute: AuthenticatedStudentPathRoute,
+  AuthenticatedStudentProjectsRoute: AuthenticatedStudentProjectsRoute,
+  AuthenticatedStudentIndexRoute: AuthenticatedStudentIndexRoute,
+  AuthenticatedStudentWeekWeekIdRoute: AuthenticatedStudentWeekWeekIdRoute,
+}
+
+const AuthenticatedStudentRouteWithChildren =
+  AuthenticatedStudentRoute._addFileChildren(AuthenticatedStudentRouteChildren)
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
+  AuthenticatedCollegeRoute: typeof AuthenticatedCollegeRouteWithChildren
+  AuthenticatedStudentRoute: typeof AuthenticatedStudentRouteWithChildren
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
+  AuthenticatedCollegeRoute: AuthenticatedCollegeRouteWithChildren,
+  AuthenticatedStudentRoute: AuthenticatedStudentRouteWithChildren,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ApiPublicSeedRoute: ApiPublicSeedRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
