@@ -278,7 +278,7 @@ export const Route = createFileRoute("/api/public/seed")({
         const byCode: Record<string, string> = Object.fromEntries(
           (colleges ?? []).map((c) => [c.code, c.id]),
         );
-        const cid = (code: string): string => cid(code) ?? "";
+        const cid = (code: string): string => byCode[code] ?? "";
 
         // Admin user
         const adminId = await ensureUser(admin, "admin@startsafe.in", "Admin@123", "StartSafe Admin");
