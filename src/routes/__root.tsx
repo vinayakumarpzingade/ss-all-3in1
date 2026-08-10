@@ -77,14 +77,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "StartSafe — Learn • Build • Innovate" },
+      { title: "StartSafe — Campus Readiness Platform" },
       {
         name: "description",
         content:
-          "StartSafe is the campus readiness platform connecting students, colleges and central administrators in real time.",
+          "One platform, three connected portals: Student Ecosystem, College Command Center and Central Intelligence. Learning paths, mock tests, coding practice, projects and certificates in real time.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "StartSafe — Campus Readiness Platform" },
+      { name: "twitter:title", content: "StartSafe — Campus Readiness Platform" },
+      { property: "og:description", content: "One platform, three connected portals: Student Ecosystem, College Command Center and Central Intelligence. Learning paths, mock tests, coding practice, projects and certificates in real time." },
+      { name: "twitter:description", content: "One platform, three connected portals: Student Ecosystem, College Command Center and Central Intelligence. Learning paths, mock tests, coding practice, projects and certificates in real time." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c1160fa3075e84db7114c38c818f0f01/id-preview-0a0a48d9--f2138070-48a0-44b5-9dfb-95c8b50be04b.lovable.app-1786373704436.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c1160fa3075e84db7114c38c818f0f01/id-preview-0a0a48d9--f2138070-48a0-44b5-9dfb-95c8b50be04b.lovable.app-1786373704436.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

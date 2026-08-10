@@ -15,7 +15,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Learning paths, mock tests, coding practice, projects and certificates synchronised across students, colleges and admins.",
+          "One platform, three connected portals: Student Ecosystem, College Command Center and Central Intelligence. Learning paths, mock tests, coding practice, projects and certificates in real time.",
       },
     ],
   }),
