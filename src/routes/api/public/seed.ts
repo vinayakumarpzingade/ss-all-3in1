@@ -260,7 +260,7 @@ export const Route = createFileRoute("/api/public/seed")({
         const { supabaseAdmin: admin } = await import("@/integrations/supabase/client.server");
 
         const { count } = await admin
-          .from("colleges")
+          .from("learning_paths")
           .select("id", { count: "exact", head: true });
         if ((count ?? 0) > 0) {
           return Response.json({ ok: true, skipped: "already seeded" });
@@ -269,16 +269,20 @@ export const Route = createFileRoute("/api/public/seed")({
         // Colleges
         const { data: colleges, error: cErr } = await admin
           .from("colleges")
-          .insert([
-            { name: "P.E.S. College of Engineering, Mandya", code: "PESCE", city: "Mandya" },
-            { name: "Srushti Degree College", code: "SRUSHTI", city: "Bengaluru" },
-          ])
+          .upsert(
+            [
+              { name: "P.E.S. College of Engineering, Mandya", code: "PESCE", city: "Mandya" },
+              { name: "Srushti Degree College", code: "SRUSHTI", city: "Bengaluru" },
+            ],
+            { onConflict: "code" },
+          )
           .select();
         if (cErr) throw cErr;
         const byCode: Record<string, string> = Object.fromEntries(
           (colleges ?? []).map((c) => [c.code, c.id]),
         );
-        const cid = (code: string): string => cid(code) ?? "";
+        const cid = (code: string): string => byCode[code] ?? "";
+
 
         // Admin user
         const adminId = await ensureUser(admin, "admin@startsafe.in", "Admin@123", "StartSafe Admin");
