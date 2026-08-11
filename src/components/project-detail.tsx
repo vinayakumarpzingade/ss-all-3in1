@@ -24,12 +24,11 @@ function Field({ label, value }: { label: string; value: React.ReactNode }) {
 export function ProjectDetailView({
   submissionId,
   canReview,
-  studentLinkBase,
+  portal,
 }: {
   submissionId: string;
   canReview: boolean;
-  /** e.g. "/admin/student" — omit to hide the student profile link */
-  studentLinkBase?: string | undefined;
+  portal: "admin" | "college";
 }) {
   const queryClient = useQueryClient();
   useRealtime(["project_submissions"], ["project-detail"]);
@@ -124,9 +123,9 @@ export function ProjectDetailView({
             <Field
               label="Student"
               value={
-                studentLinkBase && data.student ? (
+                data.student ? (
                   <Link
-                    to={`${studentLinkBase}/$studentId`}
+                    to={portal === "admin" ? "/admin/student/$studentId" : "/college/student/$studentId"}
                     params={{ studentId: data.student.id }}
                     className="text-primary hover:underline"
                   >

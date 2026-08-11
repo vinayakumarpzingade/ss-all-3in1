@@ -8,11 +8,10 @@ import { useRealtime } from "@/lib/use-auth";
 
 export function StudentProfileView({
   studentId,
-  projectLinkBase,
+  portal,
 }: {
   studentId: string;
-  /** e.g. "/admin/project" or "/college/project" */
-  projectLinkBase: string;
+  portal: "admin" | "college";
 }) {
   useRealtime(
     ["students", "progress", "mock_attempts", "coding_submissions", "project_submissions", "certificates"],
@@ -176,12 +175,12 @@ export function StudentProfileView({
             <StatCard
               label="Learning path"
               value={data.paths[0]?.title ?? "Not assigned"}
-              hint={data.paths[0]?.course ?? undefined}
+              {...(data.paths[0]?.course ? { hint: data.paths[0].course } : {})}
             />
             <StatCard
               label="Current week"
               value={data.currentWeek ? `Week ${data.currentWeek.week_number}` : "—"}
-              hint={data.currentWeek?.title ?? undefined}
+              {...(data.currentWeek?.title ? { hint: data.currentWeek.title } : {})}
             />
             <StatCard
               label="Weeks completed"
@@ -246,7 +245,7 @@ export function StudentProfileView({
                 {data.projects.map((project) => (
                   <li key={project.id} className="border-b border-border pb-2 last:border-0">
                     <Link
-                      to={`${projectLinkBase}/$submissionId`}
+                      to={portal === "admin" ? "/admin/project/$submissionId" : "/college/project/$submissionId"}
                       params={{ submissionId: project.id }}
                       className="font-medium text-primary hover:underline"
                     >
