@@ -11,7 +11,7 @@ export function LoadingBlock({ rows = 3 }: { rows?: number }) {
   );
 }
 
-export function EmptyState({ title, hint }: { title: string; hint?: string }) {
+export function EmptyState({ title, hint }: { title: string; hint?: string | undefined }) {
   return (
     <div className="panel p-8 text-center">
       <p className="text-sm font-medium">{title}</p>
@@ -41,8 +41,8 @@ export function QueryState({
   isLoading: boolean;
   error?: unknown;
   isEmpty?: boolean;
-  emptyTitle?: string;
-  emptyHint?: string;
+  emptyTitle?: string | undefined;
+  emptyHint?: string | undefined;
   children: ReactNode;
 }) {
   if (isLoading) return <LoadingBlock />;
