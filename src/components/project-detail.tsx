@@ -132,8 +132,9 @@ export function ProjectDetailView({
                     {data.student.name}
                   </Link>
                 ) : (
-                  data.student?.name
+                  "—"
                 )
+
               }
             />
             <Field label="Student ID / USN" value={data.student?.usn} />
