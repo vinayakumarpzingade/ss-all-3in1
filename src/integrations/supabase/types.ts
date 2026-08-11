@@ -68,6 +68,7 @@ export type Database = {
       }
       assignments: {
         Row: {
+          archived_at: string | null
           brief: string | null
           created_at: string
           id: string
@@ -75,6 +76,7 @@ export type Database = {
           week_id: string | null
         }
         Insert: {
+          archived_at?: string | null
           brief?: string | null
           created_at?: string
           id?: string
@@ -82,6 +84,7 @@ export type Database = {
           week_id?: string | null
         }
         Update: {
+          archived_at?: string | null
           brief?: string | null
           created_at?: string
           id?: string
@@ -100,6 +103,7 @@ export type Database = {
       }
       certificates: {
         Row: {
+          archived_at: string | null
           college_id: string
           id: string
           issued_at: string
@@ -109,6 +113,7 @@ export type Database = {
           title: string
         }
         Insert: {
+          archived_at?: string | null
           college_id: string
           id?: string
           issued_at?: string
@@ -118,6 +123,7 @@ export type Database = {
           title: string
         }
         Update: {
+          archived_at?: string | null
           college_id?: string
           id?: string
           issued_at?: string
@@ -152,6 +158,7 @@ export type Database = {
       }
       coding_questions: {
         Row: {
+          archived_at: string | null
           difficulty: string
           expected_output: string | null
           id: string
@@ -165,6 +172,7 @@ export type Database = {
           week_id: string | null
         }
         Insert: {
+          archived_at?: string | null
           difficulty?: string
           expected_output?: string | null
           id?: string
@@ -178,6 +186,7 @@ export type Database = {
           week_id?: string | null
         }
         Update: {
+          archived_at?: string | null
           difficulty?: string
           expected_output?: string | null
           id?: string
@@ -271,6 +280,42 @@ export type Database = {
           },
         ]
       }
+      college_courses: {
+        Row: {
+          college_id: string
+          course_code: string
+          created_at: string
+          id: string
+        }
+        Insert: {
+          college_id: string
+          course_code: string
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          college_id?: string
+          course_code?: string
+          created_at?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "college_courses_college_id_fkey"
+            columns: ["college_id"]
+            isOneToOne: false
+            referencedRelation: "colleges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "college_courses_course_code_fkey"
+            columns: ["course_code"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       college_paths: {
         Row: {
           college_id: string
@@ -309,7 +354,51 @@ export type Database = {
       }
       colleges: {
         Row: {
+          archived_at: string | null
           city: string | null
+          code: string
+          college_code: string | null
+          created_at: string
+          id: string
+          is_active: boolean
+          location: string | null
+          name: string
+          officer_email: string | null
+          officer_name: string | null
+          officer_phone: string | null
+        }
+        Insert: {
+          archived_at?: string | null
+          city?: string | null
+          code: string
+          college_code?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          location?: string | null
+          name: string
+          officer_email?: string | null
+          officer_name?: string | null
+          officer_phone?: string | null
+        }
+        Update: {
+          archived_at?: string | null
+          city?: string | null
+          code?: string
+          college_code?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          location?: string | null
+          name?: string
+          officer_email?: string | null
+          officer_name?: string | null
+          officer_phone?: string | null
+        }
+        Relationships: []
+      }
+      courses: {
+        Row: {
           code: string
           created_at: string
           id: string
@@ -317,7 +406,6 @@ export type Database = {
           name: string
         }
         Insert: {
-          city?: string | null
           code: string
           created_at?: string
           id?: string
@@ -325,7 +413,6 @@ export type Database = {
           name: string
         }
         Update: {
-          city?: string | null
           code?: string
           created_at?: string
           id?: string
@@ -334,8 +421,45 @@ export type Database = {
         }
         Relationships: []
       }
+      learning_path_courses: {
+        Row: {
+          course_code: string
+          created_at: string
+          id: string
+          path_id: string
+        }
+        Insert: {
+          course_code: string
+          created_at?: string
+          id?: string
+          path_id: string
+        }
+        Update: {
+          course_code?: string
+          created_at?: string
+          id?: string
+          path_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "learning_path_courses_course_code_fkey"
+            columns: ["course_code"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "learning_path_courses_path_id_fkey"
+            columns: ["path_id"]
+            isOneToOne: false
+            referencedRelation: "learning_paths"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       learning_paths: {
         Row: {
+          archived_at: string | null
           course: string | null
           created_at: string
           department: string | null
@@ -346,6 +470,7 @@ export type Database = {
           title: string
         }
         Insert: {
+          archived_at?: string | null
           course?: string | null
           created_at?: string
           department?: string | null
@@ -356,6 +481,7 @@ export type Database = {
           title: string
         }
         Update: {
+          archived_at?: string | null
           course?: string | null
           created_at?: string
           department?: string | null
@@ -369,6 +495,7 @@ export type Database = {
       }
       mcqs: {
         Row: {
+          archived_at: string | null
           correct_index: number
           explanation: string | null
           id: string
@@ -378,6 +505,7 @@ export type Database = {
           week_id: string
         }
         Insert: {
+          archived_at?: string | null
           correct_index?: number
           explanation?: string | null
           id?: string
@@ -387,6 +515,7 @@ export type Database = {
           week_id: string
         }
         Update: {
+          archived_at?: string | null
           correct_index?: number
           explanation?: string | null
           id?: string
@@ -444,33 +573,60 @@ export type Database = {
       mock_attempts: {
         Row: {
           answers: Json
+          attempt_number: number
+          auto_submitted: boolean
           college_id: string
           created_at: string
+          duration_seconds: number | null
+          fullscreen_exit_count: number
           id: string
           score: number
+          started_at: string | null
           student_id: string
+          submitted_at: string | null
+          tab_switch_count: number
           test_id: string
+          time_taken_seconds: number | null
           total: number
+          violations: Json
         }
         Insert: {
           answers?: Json
+          attempt_number?: number
+          auto_submitted?: boolean
           college_id: string
           created_at?: string
+          duration_seconds?: number | null
+          fullscreen_exit_count?: number
           id?: string
           score?: number
+          started_at?: string | null
           student_id: string
+          submitted_at?: string | null
+          tab_switch_count?: number
           test_id: string
+          time_taken_seconds?: number | null
           total?: number
+          violations?: Json
         }
         Update: {
           answers?: Json
+          attempt_number?: number
+          auto_submitted?: boolean
           college_id?: string
           created_at?: string
+          duration_seconds?: number | null
+          fullscreen_exit_count?: number
           id?: string
           score?: number
+          started_at?: string | null
           student_id?: string
+          submitted_at?: string | null
+          tab_switch_count?: number
           test_id?: string
+          time_taken_seconds?: number | null
           total?: number
+          violations?: Json
         }
         Relationships: [
           {
@@ -533,28 +689,61 @@ export type Database = {
       }
       mock_tests: {
         Row: {
+          archived_at: string | null
           created_at: string
           description: string | null
+          difficulty: string
           duration_minutes: number
+          end_at: string | null
           id: string
+          instructions: string | null
           is_published: boolean
+          max_attempts: number
+          max_violations: number
+          passing_marks: number | null
+          start_at: string | null
+          target_course: string | null
+          target_semester: number | null
           title: string
+          total_marks: number | null
         }
         Insert: {
+          archived_at?: string | null
           created_at?: string
           description?: string | null
+          difficulty?: string
           duration_minutes?: number
+          end_at?: string | null
           id?: string
+          instructions?: string | null
           is_published?: boolean
+          max_attempts?: number
+          max_violations?: number
+          passing_marks?: number | null
+          start_at?: string | null
+          target_course?: string | null
+          target_semester?: number | null
           title: string
+          total_marks?: number | null
         }
         Update: {
+          archived_at?: string | null
           created_at?: string
           description?: string | null
+          difficulty?: string
           duration_minutes?: number
+          end_at?: string | null
           id?: string
+          instructions?: string | null
           is_published?: boolean
+          max_attempts?: number
+          max_violations?: number
+          passing_marks?: number | null
+          start_at?: string | null
+          target_course?: string | null
+          target_semester?: number | null
           title?: string
+          total_marks?: number | null
         }
         Relationships: []
       }
@@ -685,43 +874,67 @@ export type Database = {
       }
       project_submissions: {
         Row: {
+          archived_at: string | null
           college_id: string
           created_at: string
+          deadline: string | null
+          demo_url: string | null
           description: string | null
+          docs_url: string | null
           file_url: string | null
           github_url: string | null
           id: string
           name: string
+          objectives: string | null
           project_id: string | null
           review_note: string | null
+          reviewed_at: string | null
+          score: number | null
           status: string
           student_id: string
+          tech_stack: string | null
         }
         Insert: {
+          archived_at?: string | null
           college_id: string
           created_at?: string
+          deadline?: string | null
+          demo_url?: string | null
           description?: string | null
+          docs_url?: string | null
           file_url?: string | null
           github_url?: string | null
           id?: string
           name: string
+          objectives?: string | null
           project_id?: string | null
           review_note?: string | null
+          reviewed_at?: string | null
+          score?: number | null
           status?: string
           student_id: string
+          tech_stack?: string | null
         }
         Update: {
+          archived_at?: string | null
           college_id?: string
           created_at?: string
+          deadline?: string | null
+          demo_url?: string | null
           description?: string | null
+          docs_url?: string | null
           file_url?: string | null
           github_url?: string | null
           id?: string
           name?: string
+          objectives?: string | null
           project_id?: string | null
           review_note?: string | null
+          reviewed_at?: string | null
+          score?: number | null
           status?: string
           student_id?: string
+          tech_stack?: string | null
         }
         Relationships: [
           {
@@ -749,6 +962,7 @@ export type Database = {
       }
       projects: {
         Row: {
+          archived_at: string | null
           brief: string | null
           created_at: string
           id: string
@@ -756,6 +970,7 @@ export type Database = {
           week_id: string | null
         }
         Insert: {
+          archived_at?: string | null
           brief?: string | null
           created_at?: string
           id?: string
@@ -763,6 +978,7 @@ export type Database = {
           week_id?: string | null
         }
         Update: {
+          archived_at?: string | null
           brief?: string | null
           created_at?: string
           id?: string
@@ -781,8 +997,10 @@ export type Database = {
       }
       students: {
         Row: {
+          archived_at: string | null
           coding_score: number
           college_id: string
+          course: string | null
           created_at: string
           department: string
           email: string
@@ -792,12 +1010,15 @@ export type Database = {
           name: string
           placement_readiness: number
           profile_id: string | null
+          section: string | null
           semester: number
           usn: string
         }
         Insert: {
+          archived_at?: string | null
           coding_score?: number
           college_id: string
+          course?: string | null
           created_at?: string
           department?: string
           email: string
@@ -807,12 +1028,15 @@ export type Database = {
           name: string
           placement_readiness?: number
           profile_id?: string | null
+          section?: string | null
           semester?: number
           usn: string
         }
         Update: {
+          archived_at?: string | null
           coding_score?: number
           college_id?: string
+          course?: string | null
           created_at?: string
           department?: string
           email?: string
@@ -822,6 +1046,7 @@ export type Database = {
           name?: string
           placement_readiness?: number
           profile_id?: string | null
+          section?: string | null
           semester?: number
           usn?: string
         }
@@ -900,6 +1125,7 @@ export type Database = {
       }
       weeks: {
         Row: {
+          archived_at: string | null
           created_at: string
           id: string
           is_published: boolean
@@ -910,6 +1136,7 @@ export type Database = {
           week_number: number
         }
         Insert: {
+          archived_at?: string | null
           created_at?: string
           id?: string
           is_published?: boolean
@@ -920,6 +1147,7 @@ export type Database = {
           week_number: number
         }
         Update: {
+          archived_at?: string | null
           created_at?: string
           id?: string
           is_published?: boolean
@@ -944,6 +1172,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      build_college_code: {
+        Args: { _city: string; _code: string }
+        Returns: string
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
