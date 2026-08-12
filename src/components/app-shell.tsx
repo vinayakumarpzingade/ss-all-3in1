@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useSession } from "@/lib/use-auth";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { BackButton } from "@/components/back-button";
 import { GraduationCap, LogOut } from "lucide-react";
 
 type NavItem = { to: string; label: string };
