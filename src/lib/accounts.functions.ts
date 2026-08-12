@@ -65,6 +65,8 @@ export const createStudentAccount = createServerFn({ method: "POST" })
       email: data.email,
       semester: data.semester,
       department: data.department,
+      course: data.course ?? null,
+      section: data.section ?? null,
     });
     if (studentError) {
       await supabaseAdmin.auth.admin.deleteUser(userId);
