@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import {
   Bar,
@@ -18,6 +18,7 @@ export const Route = createFileRoute("/_authenticated/admin/")({
 });
 
 function AdminOverview() {
+  const navigate = useNavigate();
   useRealtime(
     ["students", "progress", "mock_attempts", "coding_submissions", "project_submissions", "certificates", "weeks"],
     ["admin-overview"],
@@ -46,6 +47,7 @@ function AdminOverview() {
         const avg = (key: "placement_readiness" | "learning_progress" | "mock_score") =>
           rows.length ? Math.round(rows.reduce((sum, r) => sum + (r[key] ?? 0), 0) / rows.length) : 0;
         return {
+          id: college.id,
           name: college.code,
           students: rows.length,
           readiness: avg("placement_readiness"),
@@ -95,18 +97,44 @@ function AdminOverview() {
       <div className="mt-6 grid gap-4 lg:grid-cols-3">
         <div className="panel p-5 lg:col-span-2">
           <h2 className="text-lg font-semibold">Readiness by college</h2>
+          <p className="text-xs text-muted-foreground">Click any bar to open that college&apos;s full report.</p>
           <div className="mt-4 h-72">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={data?.byCollege ?? []}>
+              <BarChart
+                data={data?.byCollege ?? []}
+                onClick={(state) => {
+                  const point = state?.activePayload?.[0]?.payload as { id?: string } | undefined;
+                  if (point?.id) {
+                    navigate({
+                      to: "/admin/college/$collegeId",
+                      params: { collegeId: point.id },
+                      search: { tab: "overview" },
+                    });
+                  }
+                }}
+              >
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
                 <XAxis dataKey="name" stroke="var(--muted-foreground)" fontSize={12} />
                 <YAxis domain={[0, 100]} stroke="var(--muted-foreground)" fontSize={12} />
                 <Tooltip />
-                <Bar dataKey="readiness" name="Readiness" fill="var(--chart-1)" radius={[6, 6, 0, 0]} />
-                <Bar dataKey="learning" name="Learning" fill="var(--chart-2)" radius={[6, 6, 0, 0]} />
-                <Bar dataKey="mock" name="Mock" fill="var(--chart-3)" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="readiness" name="Readiness" fill="var(--chart-1)" radius={[6, 6, 0, 0]} className="cursor-pointer" />
+                <Bar dataKey="learning" name="Learning" fill="var(--chart-2)" radius={[6, 6, 0, 0]} className="cursor-pointer" />
+                <Bar dataKey="mock" name="Mock" fill="var(--chart-3)" radius={[6, 6, 0, 0]} className="cursor-pointer" />
               </BarChart>
             </ResponsiveContainer>
+          </div>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {(data?.byCollege ?? []).map((college) => (
+              <Link
+                key={college.id}
+                to="/admin/college/$collegeId"
+                params={{ collegeId: college.id }}
+                search={{ tab: "overview" }}
+                className="rounded-md border border-border px-2 py-1 text-xs hover:bg-muted"
+              >
+                {college.name} · {college.readiness}%
+              </Link>
+            ))}
           </div>
         </div>
 
@@ -115,7 +143,13 @@ function AdminOverview() {
           <ul className="mt-4 space-y-3">
             {(data?.projects ?? []).slice(0, 8).map((project) => (
               <li key={project.id} className="border-b border-border pb-2 last:border-0">
-                <p className="text-sm font-medium">{project.name}</p>
+                <Link
+                  to="/admin/project/$submissionId"
+                  params={{ submissionId: project.id }}
+                  className="text-sm font-medium hover:underline"
+                >
+                  {project.name}
+                </Link>
                 <p className="text-xs text-muted-foreground">
                   {project.status} · {new Date(project.created_at).toLocaleString()}
                 </p>
@@ -127,6 +161,7 @@ function AdminOverview() {
           </ul>
         </div>
       </div>
+
     </div>
   );
 }

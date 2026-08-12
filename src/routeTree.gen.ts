@@ -19,6 +19,7 @@ import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminCollegesRouteImport } from './routes/_authenticated/admin.colleges'
 import { Route as AuthenticatedAdminMocksRouteImport } from './routes/_authenticated/admin.mocks'
 import { Route as AuthenticatedAdminPathsRouteImport } from './routes/_authenticated/admin.paths'
+import { Route as AuthenticatedAdminStudentsRouteImport } from './routes/_authenticated/admin.students'
 import { Route as AuthenticatedAdminSubmissionsRouteImport } from './routes/_authenticated/admin.submissions'
 import { Route as AuthenticatedCollegeIndexRouteImport } from './routes/_authenticated/college.index'
 import { Route as AuthenticatedCollegeAnalyticsRouteImport } from './routes/_authenticated/college.analytics'
@@ -30,6 +31,7 @@ import { Route as AuthenticatedStudentMocksRouteImport } from './routes/_authent
 import { Route as AuthenticatedStudentPathRouteImport } from './routes/_authenticated/student.path'
 import { Route as AuthenticatedStudentProjectsRouteImport } from './routes/_authenticated/student.projects'
 import { Route as ApiPublicSeedRouteImport } from './routes/api/public/seed'
+import { Route as AuthenticatedAdminCollegeCollegeIdRouteImport } from './routes/_authenticated/admin.college.$collegeId'
 import { Route as AuthenticatedAdminPathsIndexRouteImport } from './routes/_authenticated/admin.paths.index'
 import { Route as AuthenticatedAdminPathsPathIdRouteImport } from './routes/_authenticated/admin.paths.$pathId'
 import { Route as AuthenticatedAdminProjectSubmissionIdRouteImport } from './routes/_authenticated/admin.project.$submissionId'
@@ -88,6 +90,12 @@ const AuthenticatedAdminPathsRoute = AuthenticatedAdminPathsRouteImport.update({
   path: '/paths',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
+const AuthenticatedAdminStudentsRoute =
+  AuthenticatedAdminStudentsRouteImport.update({
+    id: '/students',
+    path: '/students',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminSubmissionsRoute =
   AuthenticatedAdminSubmissionsRouteImport.update({
     id: '/submissions',
@@ -153,6 +161,12 @@ const ApiPublicSeedRoute = ApiPublicSeedRouteImport.update({
   path: '/api/public/seed',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminCollegeCollegeIdRoute =
+  AuthenticatedAdminCollegeCollegeIdRouteImport.update({
+    id: '/college/$collegeId',
+    path: '/college/$collegeId',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminPathsIndexRoute =
   AuthenticatedAdminPathsIndexRouteImport.update({
     id: '/',
@@ -205,6 +219,7 @@ export interface FileRoutesByFullPath {
   '/admin/colleges': typeof AuthenticatedAdminCollegesRoute
   '/admin/mocks': typeof AuthenticatedAdminMocksRoute
   '/admin/paths': typeof AuthenticatedAdminPathsRouteWithChildren
+  '/admin/students': typeof AuthenticatedAdminStudentsRoute
   '/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
   '/college/analytics': typeof AuthenticatedCollegeAnalyticsRoute
   '/college/reports': typeof AuthenticatedCollegeReportsRoute
@@ -217,6 +232,7 @@ export interface FileRoutesByFullPath {
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/college/': typeof AuthenticatedCollegeIndexRoute
   '/student/': typeof AuthenticatedStudentIndexRoute
+  '/admin/college/$collegeId': typeof AuthenticatedAdminCollegeCollegeIdRoute
   '/admin/paths/$pathId': typeof AuthenticatedAdminPathsPathIdRoute
   '/admin/project/$submissionId': typeof AuthenticatedAdminProjectSubmissionIdRoute
   '/admin/student/$studentId': typeof AuthenticatedAdminStudentStudentIdRoute
@@ -230,6 +246,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/admin/colleges': typeof AuthenticatedAdminCollegesRoute
   '/admin/mocks': typeof AuthenticatedAdminMocksRoute
+  '/admin/students': typeof AuthenticatedAdminStudentsRoute
   '/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
   '/college/analytics': typeof AuthenticatedCollegeAnalyticsRoute
   '/college/reports': typeof AuthenticatedCollegeReportsRoute
@@ -242,6 +259,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/college': typeof AuthenticatedCollegeIndexRoute
   '/student': typeof AuthenticatedStudentIndexRoute
+  '/admin/college/$collegeId': typeof AuthenticatedAdminCollegeCollegeIdRoute
   '/admin/paths/$pathId': typeof AuthenticatedAdminPathsPathIdRoute
   '/admin/project/$submissionId': typeof AuthenticatedAdminProjectSubmissionIdRoute
   '/admin/student/$studentId': typeof AuthenticatedAdminStudentStudentIdRoute
@@ -261,6 +279,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/colleges': typeof AuthenticatedAdminCollegesRoute
   '/_authenticated/admin/mocks': typeof AuthenticatedAdminMocksRoute
   '/_authenticated/admin/paths': typeof AuthenticatedAdminPathsRouteWithChildren
+  '/_authenticated/admin/students': typeof AuthenticatedAdminStudentsRoute
   '/_authenticated/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
   '/_authenticated/college/analytics': typeof AuthenticatedCollegeAnalyticsRoute
   '/_authenticated/college/reports': typeof AuthenticatedCollegeReportsRoute
@@ -273,6 +292,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/_authenticated/college/': typeof AuthenticatedCollegeIndexRoute
   '/_authenticated/student/': typeof AuthenticatedStudentIndexRoute
+  '/_authenticated/admin/college/$collegeId': typeof AuthenticatedAdminCollegeCollegeIdRoute
   '/_authenticated/admin/paths/$pathId': typeof AuthenticatedAdminPathsPathIdRoute
   '/_authenticated/admin/project/$submissionId': typeof AuthenticatedAdminProjectSubmissionIdRoute
   '/_authenticated/admin/student/$studentId': typeof AuthenticatedAdminStudentStudentIdRoute
@@ -292,6 +312,7 @@ export interface FileRouteTypes {
     | '/admin/colleges'
     | '/admin/mocks'
     | '/admin/paths'
+    | '/admin/students'
     | '/admin/submissions'
     | '/college/analytics'
     | '/college/reports'
@@ -304,6 +325,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/college/'
     | '/student/'
+    | '/admin/college/$collegeId'
     | '/admin/paths/$pathId'
     | '/admin/project/$submissionId'
     | '/admin/student/$studentId'
@@ -317,6 +339,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/admin/colleges'
     | '/admin/mocks'
+    | '/admin/students'
     | '/admin/submissions'
     | '/college/analytics'
     | '/college/reports'
@@ -329,6 +352,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/college'
     | '/student'
+    | '/admin/college/$collegeId'
     | '/admin/paths/$pathId'
     | '/admin/project/$submissionId'
     | '/admin/student/$studentId'
@@ -347,6 +371,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/colleges'
     | '/_authenticated/admin/mocks'
     | '/_authenticated/admin/paths'
+    | '/_authenticated/admin/students'
     | '/_authenticated/admin/submissions'
     | '/_authenticated/college/analytics'
     | '/_authenticated/college/reports'
@@ -359,6 +384,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/'
     | '/_authenticated/college/'
     | '/_authenticated/student/'
+    | '/_authenticated/admin/college/$collegeId'
     | '/_authenticated/admin/paths/$pathId'
     | '/_authenticated/admin/project/$submissionId'
     | '/_authenticated/admin/student/$studentId'
@@ -447,6 +473,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminPathsRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/students': {
+      id: '/_authenticated/admin/students'
+      path: '/students'
+      fullPath: '/admin/students'
+      preLoaderRoute: typeof AuthenticatedAdminStudentsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/submissions': {
       id: '/_authenticated/admin/submissions'
       path: '/submissions'
@@ -524,6 +557,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicSeedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin/college/$collegeId': {
+      id: '/_authenticated/admin/college/$collegeId'
+      path: '/college/$collegeId'
+      fullPath: '/admin/college/$collegeId'
+      preLoaderRoute: typeof AuthenticatedAdminCollegeCollegeIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/paths/': {
       id: '/_authenticated/admin/paths/'
       path: '/'
@@ -596,8 +636,10 @@ interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminCollegesRoute: typeof AuthenticatedAdminCollegesRoute
   AuthenticatedAdminMocksRoute: typeof AuthenticatedAdminMocksRoute
   AuthenticatedAdminPathsRoute: typeof AuthenticatedAdminPathsRouteWithChildren
+  AuthenticatedAdminStudentsRoute: typeof AuthenticatedAdminStudentsRoute
   AuthenticatedAdminSubmissionsRoute: typeof AuthenticatedAdminSubmissionsRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminCollegeCollegeIdRoute: typeof AuthenticatedAdminCollegeCollegeIdRoute
   AuthenticatedAdminProjectSubmissionIdRoute: typeof AuthenticatedAdminProjectSubmissionIdRoute
   AuthenticatedAdminStudentStudentIdRoute: typeof AuthenticatedAdminStudentStudentIdRoute
 }
@@ -606,8 +648,11 @@ const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminCollegesRoute: AuthenticatedAdminCollegesRoute,
   AuthenticatedAdminMocksRoute: AuthenticatedAdminMocksRoute,
   AuthenticatedAdminPathsRoute: AuthenticatedAdminPathsRouteWithChildren,
+  AuthenticatedAdminStudentsRoute: AuthenticatedAdminStudentsRoute,
   AuthenticatedAdminSubmissionsRoute: AuthenticatedAdminSubmissionsRoute,
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminCollegeCollegeIdRoute:
+    AuthenticatedAdminCollegeCollegeIdRoute,
   AuthenticatedAdminProjectSubmissionIdRoute:
     AuthenticatedAdminProjectSubmissionIdRoute,
   AuthenticatedAdminStudentStudentIdRoute:

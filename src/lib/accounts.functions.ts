@@ -9,6 +9,8 @@ const createSchema = z.object({
   password: z.string().min(8).max(72),
   semester: z.number().int().min(1).max(12),
   department: z.string().trim().min(1).max(80),
+  course: z.string().trim().max(40).optional(),
+  section: z.string().trim().max(10).optional(),
   collegeId: z.string().uuid().optional(),
 });
 
@@ -63,6 +65,8 @@ export const createStudentAccount = createServerFn({ method: "POST" })
       email: data.email,
       semester: data.semester,
       department: data.department,
+      course: data.course ?? null,
+      section: data.section ?? null,
     });
     if (studentError) {
       await supabaseAdmin.auth.admin.deleteUser(userId);
@@ -83,6 +87,11 @@ const collegeSchema = z.object({
   name: z.string().trim().min(3).max(160),
   code: z.string().trim().min(2).max(20),
   city: z.string().trim().max(80).optional(),
+  location: z.string().trim().max(120).optional(),
+  officerName: z.string().trim().max(120).optional(),
+  officerEmail: z.string().trim().max(160).optional(),
+  officerPhone: z.string().trim().max(40).optional(),
+  courses: z.array(z.string().trim().min(1).max(40)).max(30).optional(),
   email: z.string().trim().email().max(160),
   password: z.string().min(8).max(72),
 });
@@ -105,12 +114,22 @@ export const createCollegeAccount = createServerFn({ method: "POST" })
       .insert({
         name: data.name,
         code: data.code.toUpperCase(),
-        city: data.city ?? "",
+        city: data.city ?? data.location ?? "",
+        location: data.location ?? data.city ?? "",
+        officer_name: data.officerName ?? null,
+        officer_email: data.officerEmail ?? null,
+        officer_phone: data.officerPhone ?? null,
         is_active: true,
       })
       .select()
       .single();
     if (collegeError) throw new Error(collegeError.message);
+
+    if (data.courses?.length) {
+      await supabaseAdmin
+        .from("college_courses")
+        .insert(data.courses.map((course_code) => ({ college_id: college.id, course_code })));
+    }
 
     const { data: created, error: authError } = await supabaseAdmin.auth.admin.createUser({
       email: data.email,
