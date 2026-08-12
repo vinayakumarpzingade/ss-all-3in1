@@ -47,6 +47,7 @@ function AdminOverview() {
         const avg = (key: "placement_readiness" | "learning_progress" | "mock_score") =>
           rows.length ? Math.round(rows.reduce((sum, r) => sum + (r[key] ?? 0), 0) / rows.length) : 0;
         return {
+          id: college.id,
           name: college.code,
           students: rows.length,
           readiness: avg("placement_readiness"),
