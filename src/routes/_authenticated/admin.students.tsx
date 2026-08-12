@@ -65,7 +65,7 @@ function AdminStudents() {
   function setFilter(patch: StudentSearch) {
     navigate({
       to: "/admin/students",
-      search: (prev) => {
+      search: (prev: StudentSearch) => {
         const next: StudentSearch = { ...prev, ...patch };
         for (const key of ["college", "course", "sem", "q"] as const) {
           if (!next[key]) delete next[key];
