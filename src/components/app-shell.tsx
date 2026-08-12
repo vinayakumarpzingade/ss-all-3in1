@@ -113,18 +113,26 @@ export function PageHeader({
   title,
   description,
   actions,
+  back,
+  backLabel,
 }: {
   title: string;
   description?: string;
   actions?: ReactNode;
+  /** Fallback path used when there is no browser history to go back to. */
+  back?: string;
+  backLabel?: string;
 }) {
   return (
-    <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-      <div>
-        <h1 className="text-2xl font-bold sm:text-3xl">{title}</h1>
-        {description ? <p className="mt-1 text-sm text-muted-foreground">{description}</p> : null}
+    <div className="mb-6">
+      {back ? <BackButton fallback={back} label={backLabel ?? "Back"} /> : null}
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold sm:text-3xl">{title}</h1>
+          {description ? <p className="mt-1 text-sm text-muted-foreground">{description}</p> : null}
+        </div>
+        {actions ? <div className="flex flex-wrap gap-2">{actions}</div> : null}
       </div>
-      {actions ? <div className="flex flex-wrap gap-2">{actions}</div> : null}
     </div>
   );
 }
