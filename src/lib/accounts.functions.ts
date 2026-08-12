@@ -9,6 +9,8 @@ const createSchema = z.object({
   password: z.string().min(8).max(72),
   semester: z.number().int().min(1).max(12),
   department: z.string().trim().min(1).max(80),
+  course: z.string().trim().max(40).optional(),
+  section: z.string().trim().max(10).optional(),
   collegeId: z.string().uuid().optional(),
 });
 
