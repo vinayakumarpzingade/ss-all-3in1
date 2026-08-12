@@ -18,6 +18,7 @@ export const Route = createFileRoute("/_authenticated/admin/")({
 });
 
 function AdminOverview() {
+  const navigate = useNavigate();
   useRealtime(
     ["students", "progress", "mock_attempts", "coding_submissions", "project_submissions", "certificates", "weeks"],
     ["admin-overview"],
