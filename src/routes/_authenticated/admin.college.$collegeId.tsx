@@ -21,7 +21,7 @@ const TABS: Tab[] = ["overview", "analytics", "projects", "reports"];
 
 export const Route = createFileRoute("/_authenticated/admin/college/$collegeId")({
   validateSearch: (search: Record<string, unknown>): { tab: Tab } => {
-    const tab = String(search.tab ?? "overview") as Tab;
+    const tab = String(search["tab"] ?? "overview") as Tab;
     return { tab: TABS.includes(tab) ? tab : "overview" };
   },
   component: AdminCollegeReport,
