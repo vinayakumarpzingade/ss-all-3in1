@@ -14,6 +14,7 @@ const NAV: Record<string, NavItem[]> = {
   super_admin: [
     { to: "/admin", label: "Overview" },
     { to: "/admin/colleges", label: "Colleges" },
+    { to: "/admin/students", label: "Students" },
     { to: "/admin/paths", label: "Learning Paths" },
     { to: "/admin/mocks", label: "Mock Tests" },
     { to: "/admin/submissions", label: "Submissions" },
