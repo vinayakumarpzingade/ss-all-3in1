@@ -17,6 +17,7 @@ import { Route as AuthenticatedCollegeRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedStudentRouteImport } from './routes/_authenticated/student'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAdminCollegesRouteImport } from './routes/_authenticated/admin.colleges'
+import { Route as AuthenticatedAdminMocksRouteImport } from './routes/_authenticated/admin.mocks'
 import { Route as AuthenticatedAdminPathsRouteImport } from './routes/_authenticated/admin.paths'
 import { Route as AuthenticatedAdminStudentsRouteImport } from './routes/_authenticated/admin.students'
 import { Route as AuthenticatedAdminSubmissionsRouteImport } from './routes/_authenticated/admin.submissions'
@@ -80,6 +81,11 @@ const AuthenticatedAdminCollegesRoute =
     path: '/colleges',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAdminMocksRoute = AuthenticatedAdminMocksRouteImport.update({
+  id: '/mocks',
+  path: '/mocks',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
 const AuthenticatedAdminPathsRoute = AuthenticatedAdminPathsRouteImport.update({
   id: '/paths',
   path: '/paths',
@@ -164,9 +170,9 @@ const AuthenticatedAdminCollegeCollegeIdRoute =
   } as any)
 const AuthenticatedAdminMocksIndexRoute =
   AuthenticatedAdminMocksIndexRouteImport.update({
-    id: '/mocks/',
-    path: '/mocks/',
-    getParentRoute: () => AuthenticatedAdminRoute,
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedAdminMocksRoute,
   } as any)
 const AuthenticatedAdminPathsIndexRoute =
   AuthenticatedAdminPathsIndexRouteImport.update({
@@ -218,6 +224,7 @@ export interface FileRoutesByFullPath {
   '/college': typeof AuthenticatedCollegeRouteWithChildren
   '/student': typeof AuthenticatedStudentRouteWithChildren
   '/admin/colleges': typeof AuthenticatedAdminCollegesRoute
+  '/admin/mocks': typeof AuthenticatedAdminMocksRouteWithChildren
   '/admin/paths': typeof AuthenticatedAdminPathsRouteWithChildren
   '/admin/students': typeof AuthenticatedAdminStudentsRoute
   '/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
@@ -278,6 +285,7 @@ export interface FileRoutesById {
   '/_authenticated/college': typeof AuthenticatedCollegeRouteWithChildren
   '/_authenticated/student': typeof AuthenticatedStudentRouteWithChildren
   '/_authenticated/admin/colleges': typeof AuthenticatedAdminCollegesRoute
+  '/_authenticated/admin/mocks': typeof AuthenticatedAdminMocksRouteWithChildren
   '/_authenticated/admin/paths': typeof AuthenticatedAdminPathsRouteWithChildren
   '/_authenticated/admin/students': typeof AuthenticatedAdminStudentsRoute
   '/_authenticated/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
@@ -311,6 +319,7 @@ export interface FileRouteTypes {
     | '/college'
     | '/student'
     | '/admin/colleges'
+    | '/admin/mocks'
     | '/admin/paths'
     | '/admin/students'
     | '/admin/submissions'
@@ -370,6 +379,7 @@ export interface FileRouteTypes {
     | '/_authenticated/college'
     | '/_authenticated/student'
     | '/_authenticated/admin/colleges'
+    | '/_authenticated/admin/mocks'
     | '/_authenticated/admin/paths'
     | '/_authenticated/admin/students'
     | '/_authenticated/admin/submissions'
@@ -458,6 +468,13 @@ declare module '@tanstack/react-router' {
       path: '/colleges'
       fullPath: '/admin/colleges'
       preLoaderRoute: typeof AuthenticatedAdminCollegesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/mocks': {
+      id: '/_authenticated/admin/mocks'
+      path: '/mocks'
+      fullPath: '/admin/mocks'
+      preLoaderRoute: typeof AuthenticatedAdminMocksRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
     '/_authenticated/admin/paths': {
@@ -560,10 +577,10 @@ declare module '@tanstack/react-router' {
     }
     '/_authenticated/admin/mocks/': {
       id: '/_authenticated/admin/mocks/'
-      path: '/mocks'
+      path: '/'
       fullPath: '/admin/mocks/'
       preLoaderRoute: typeof AuthenticatedAdminMocksIndexRouteImport
-      parentRoute: typeof AuthenticatedAdminRoute
+      parentRoute: typeof AuthenticatedAdminMocksRoute
     }
     '/_authenticated/admin/paths/': {
       id: '/_authenticated/admin/paths/'
@@ -617,6 +634,20 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedAdminMocksRouteChildren {
+  AuthenticatedAdminMocksIndexRoute: typeof AuthenticatedAdminMocksIndexRoute
+}
+
+const AuthenticatedAdminMocksRouteChildren: AuthenticatedAdminMocksRouteChildren =
+  {
+    AuthenticatedAdminMocksIndexRoute: AuthenticatedAdminMocksIndexRoute,
+  }
+
+const AuthenticatedAdminMocksRouteWithChildren =
+  AuthenticatedAdminMocksRoute._addFileChildren(
+    AuthenticatedAdminMocksRouteChildren,
+  )
+
 interface AuthenticatedAdminPathsRouteChildren {
   AuthenticatedAdminPathsPathIdRoute: typeof AuthenticatedAdminPathsPathIdRoute
   AuthenticatedAdminPathsIndexRoute: typeof AuthenticatedAdminPathsIndexRoute
@@ -635,6 +666,7 @@ const AuthenticatedAdminPathsRouteWithChildren =
 
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminCollegesRoute: typeof AuthenticatedAdminCollegesRoute
+  AuthenticatedAdminMocksRoute: typeof AuthenticatedAdminMocksRouteWithChildren
   AuthenticatedAdminPathsRoute: typeof AuthenticatedAdminPathsRouteWithChildren
   AuthenticatedAdminStudentsRoute: typeof AuthenticatedAdminStudentsRoute
   AuthenticatedAdminSubmissionsRoute: typeof AuthenticatedAdminSubmissionsRoute
@@ -642,11 +674,11 @@ interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminCollegeCollegeIdRoute: typeof AuthenticatedAdminCollegeCollegeIdRoute
   AuthenticatedAdminProjectSubmissionIdRoute: typeof AuthenticatedAdminProjectSubmissionIdRoute
   AuthenticatedAdminStudentStudentIdRoute: typeof AuthenticatedAdminStudentStudentIdRoute
-  AuthenticatedAdminMocksIndexRoute: typeof AuthenticatedAdminMocksIndexRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminCollegesRoute: AuthenticatedAdminCollegesRoute,
+  AuthenticatedAdminMocksRoute: AuthenticatedAdminMocksRouteWithChildren,
   AuthenticatedAdminPathsRoute: AuthenticatedAdminPathsRouteWithChildren,
   AuthenticatedAdminStudentsRoute: AuthenticatedAdminStudentsRoute,
   AuthenticatedAdminSubmissionsRoute: AuthenticatedAdminSubmissionsRoute,
@@ -657,7 +689,6 @@ const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
     AuthenticatedAdminProjectSubmissionIdRoute,
   AuthenticatedAdminStudentStudentIdRoute:
     AuthenticatedAdminStudentStudentIdRoute,
-  AuthenticatedAdminMocksIndexRoute: AuthenticatedAdminMocksIndexRoute,
 }
 
 const AuthenticatedAdminRouteWithChildren =
