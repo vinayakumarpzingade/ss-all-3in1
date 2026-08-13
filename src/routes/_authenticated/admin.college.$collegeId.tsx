@@ -97,7 +97,6 @@ function AdminCollegeReport() {
             : "Loading college report…"
         }
         back="/admin/colleges"
-        back="/admin/colleges"
         backLabel="Back to Colleges"
         actions={
           <Button asChild size="sm" variant="outline">
