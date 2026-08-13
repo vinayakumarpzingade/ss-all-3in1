@@ -277,7 +277,11 @@ function AdminColleges() {
                     type="button"
                     className="text-left"
                     onClick={() =>
-                      navigate({ to: "/admin/college/$collegeId", params: { collegeId: college.id } })
+                      navigate({
+                        to: "/admin/college/$collegeId",
+                        params: { collegeId: college.id },
+                        search: { tab: "overview" },
+                      })
                     }
                   >
                     <h3 className="font-semibold hover:underline">{college.name}</h3>
@@ -302,7 +306,11 @@ function AdminColleges() {
 
                 <div className="mt-3 flex flex-wrap gap-2">
                   <Button asChild size="sm">
-                    <Link to="/admin/college/$collegeId" params={{ collegeId: college.id }}>
+                    <Link
+                      to="/admin/college/$collegeId"
+                      params={{ collegeId: college.id }}
+                      search={{ tab: "overview" }}
+                    >
                       View
                     </Link>
                   </Button>
