@@ -135,7 +135,7 @@ function AdminMocks() {
   async function archiveTest(testId: string, next: boolean) {
     const { error } = await supabase
       .from("mock_tests")
-      .update({ archived_at: next ? new Date().toISOString() : null, is_published: next ? false : undefined })
+      .update(next ? { archived_at: new Date().toISOString(), is_published: false } : { archived_at: null })
       .eq("id", testId);
     if (error) {
       toast.error(error.message);
@@ -313,7 +313,7 @@ function AdminMocks() {
         </form>
 
         <div className="space-y-4 lg:col-span-2">
-          <QueryState isLoading={query.isLoading} error={query.error} isEmpty={!tests.length} emptyText="No mock tests yet.">
+          <QueryState isLoading={query.isLoading} error={query.error} isEmpty={!tests.length} emptyTitle="No mock tests yet.">
             {tests.map((test) => {
               const questionCount = (data?.questions ?? []).filter((q) => q.test_id === test.id).length;
               const attempts = (data?.attempts ?? []).filter((a) => a.test_id === test.id);
