@@ -44,6 +44,7 @@ function CollegeReports() {
       <PageHeader
         title="Weekly reports"
         description="Snapshot of every student's readiness, exportable as CSV."
+        back="/college"
         actions={<Button onClick={download}>Download CSV</Button>}
       />
       <div className="panel overflow-x-auto">

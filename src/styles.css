@@ -107,24 +107,45 @@
 }
 
 .dark {
-  --background: oklch(0.17 0.03 255);
-  --foreground: oklch(0.96 0.005 240);
-  --card: oklch(0.22 0.04 255);
-  --card-foreground: oklch(0.96 0.005 240);
-  --popover: oklch(0.22 0.04 255);
-  --popover-foreground: oklch(0.96 0.005 240);
-  --primary: oklch(0.66 0.12 200);
-  --primary-foreground: oklch(0.17 0.03 255);
-  --secondary: oklch(0.27 0.04 255);
-  --secondary-foreground: oklch(0.96 0.005 240);
-  --muted: oklch(0.27 0.04 255);
-  --muted-foreground: oklch(0.72 0.02 250);
-  --accent: oklch(0.8 0.15 78);
-  --accent-foreground: oklch(0.22 0.05 60);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 16%);
-  --ink: oklch(0.14 0.03 255);
-  --ink-foreground: oklch(0.97 0.005 240);
+  /* StartSafe Career OS — midnight navy foundation, electric blue → cyan → violet accents */
+  --background: oklch(0.16 0.025 265);
+  --foreground: oklch(0.97 0.005 250);
+  --card: oklch(0.21 0.03 265);
+  --card-foreground: oklch(0.97 0.005 250);
+  --popover: oklch(0.2 0.03 265);
+  --popover-foreground: oklch(0.97 0.005 250);
+  --primary: oklch(0.68 0.16 245);
+  --primary-foreground: oklch(0.14 0.03 265);
+  --secondary: oklch(0.26 0.035 265);
+  --secondary-foreground: oklch(0.96 0.005 250);
+  --muted: oklch(0.25 0.03 265);
+  --muted-foreground: oklch(0.74 0.025 260);
+  --accent: oklch(0.7 0.17 300);
+  --accent-foreground: oklch(0.15 0.03 265);
+  --destructive: oklch(0.62 0.2 22);
+  --destructive-foreground: oklch(0.98 0.005 250);
+  --success: oklch(0.74 0.16 158);
+  --success-foreground: oklch(0.15 0.03 265);
+  --warning: oklch(0.82 0.15 78);
+  --warning-foreground: oklch(0.2 0.05 60);
+  --border: oklch(1 0 0 / 11%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.7 0.15 240);
+  --ink: oklch(0.13 0.025 265);
+  --ink-foreground: oklch(0.97 0.005 250);
+  --chart-1: oklch(0.68 0.16 245);
+  --chart-2: oklch(0.78 0.14 200);
+  --chart-3: oklch(0.74 0.16 158);
+  --chart-4: oklch(0.7 0.17 300);
+  --chart-5: oklch(0.82 0.15 78);
+  --sidebar: oklch(0.19 0.03 265);
+  --sidebar-foreground: oklch(0.94 0.01 250);
+  --sidebar-primary: oklch(0.7 0.15 240);
+  --sidebar-primary-foreground: oklch(0.14 0.03 265);
+  --sidebar-accent: oklch(0.26 0.04 265);
+  --sidebar-accent-foreground: oklch(0.97 0.005 250);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.7 0.15 240);
 }
 
 @layer base {
@@ -138,6 +159,14 @@
     font-family: var(--font-sans);
   }
 
+  .dark body {
+    background-image:
+      radial-gradient(60rem 40rem at 12% -10%, oklch(0.45 0.16 250 / 0.22), transparent 70%),
+      radial-gradient(50rem 34rem at 100% 0%, oklch(0.5 0.17 300 / 0.16), transparent 70%),
+      radial-gradient(46rem 30rem at 50% 110%, oklch(0.6 0.14 190 / 0.1), transparent 70%);
+    background-attachment: fixed;
+  }
+
   h1,
   h2,
   h3,
@@ -149,9 +178,77 @@
 
 @utility panel {
   background-color: var(--color-card);
+  background-image: linear-gradient(
+    160deg,
+    color-mix(in oklab, var(--color-primary) 7%, transparent),
+    transparent 55%
+  );
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-panel);
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+@utility panel-hover {
+  &:hover {
+    border-color: color-mix(in oklab, var(--color-primary) 45%, transparent);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 34px oklch(0.2 0.05 265 / 0.35);
+  }
+}
+
+/* Activity accents — one shared StartSafe system */
+@utility accent-learning {
+  background-image: linear-gradient(135deg, oklch(0.68 0.16 245 / 0.22), transparent 70%);
+  border-color: oklch(0.68 0.16 245 / 0.35);
+}
+
+@utility accent-coding {
+  background-image: linear-gradient(135deg, oklch(0.78 0.14 200 / 0.22), transparent 70%);
+  border-color: oklch(0.78 0.14 200 / 0.35);
+}
+
+@utility accent-projects {
+  background-image: linear-gradient(135deg, oklch(0.7 0.17 300 / 0.22), transparent 70%);
+  border-color: oklch(0.7 0.17 300 / 0.35);
+}
+
+@utility accent-certs {
+  background-image: linear-gradient(135deg, oklch(0.66 0.19 315 / 0.22), transparent 70%);
+  border-color: oklch(0.66 0.19 315 / 0.35);
+}
+
+@utility accent-mocks {
+  background-image: linear-gradient(135deg, oklch(0.74 0.16 158 / 0.22), transparent 70%);
+  border-color: oklch(0.74 0.16 158 / 0.35);
+}
+
+@utility accent-career {
+  background-image: linear-gradient(135deg, oklch(0.62 0.18 275 / 0.24), transparent 70%);
+  border-color: oklch(0.62 0.18 275 / 0.35);
+}
+
+@utility brand-gradient {
+  background-image: linear-gradient(
+    100deg,
+    oklch(0.74 0.16 158),
+    oklch(0.68 0.16 245) 55%,
+    oklch(0.7 0.17 300)
+  );
+}
+
+@utility brand-text {
+  background-image: linear-gradient(
+    100deg,
+    oklch(0.74 0.16 158),
+    oklch(0.72 0.15 230) 50%,
+    oklch(0.72 0.17 300)
+  );
+  background-clip: text;
+  color: transparent;
 }
 
 @utility stat-label {

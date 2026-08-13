@@ -10,7 +10,11 @@ function CollegeProjectDetail() {
   const { submissionId } = Route.useParams();
   return (
     <div>
-      <PageHeader title="Project submission" description="Review this student's project submission." />
+      <PageHeader
+        title="Project submission"
+        description="Review this student's project submission."
+        back="/college/students"
+      />
       <ProjectDetailView submissionId={submissionId} canReview portal="college" />
     </div>
   );

@@ -10,7 +10,11 @@ function CollegeStudentProfile() {
   const { studentId } = Route.useParams();
   return (
     <div>
-      <PageHeader title="Student profile" description="Readiness, progress and submissions for this student." />
+      <PageHeader
+        title="Student profile"
+        description="Readiness, progress and submissions for this student."
+        back="/college/students"
+      />
       <StudentProfileView studentId={studentId} portal="college" />
     </div>
   );

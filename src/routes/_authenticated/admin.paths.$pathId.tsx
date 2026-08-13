@@ -165,6 +165,7 @@ function WeekEditor() {
       <PageHeader
         title={data?.path?.title ?? "Week editor"}
         description="Paste one structured block. Publishing parses it into student-facing sections automatically."
+        back="/admin/paths"
       />
 
       <div className="mb-4 flex flex-wrap gap-2">

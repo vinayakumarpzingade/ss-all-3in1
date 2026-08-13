@@ -32,6 +32,8 @@ import { Route as AuthenticatedStudentPathRouteImport } from './routes/_authenti
 import { Route as AuthenticatedStudentProjectsRouteImport } from './routes/_authenticated/student.projects'
 import { Route as ApiPublicSeedRouteImport } from './routes/api/public/seed'
 import { Route as AuthenticatedAdminCollegeCollegeIdRouteImport } from './routes/_authenticated/admin.college.$collegeId'
+import { Route as AuthenticatedAdminMocksIndexRouteImport } from './routes/_authenticated/admin.mocks.index'
+import { Route as AuthenticatedAdminMocksTestIdRouteImport } from './routes/_authenticated/admin.mocks.$testId'
 import { Route as AuthenticatedAdminPathsIndexRouteImport } from './routes/_authenticated/admin.paths.index'
 import { Route as AuthenticatedAdminPathsPathIdRouteImport } from './routes/_authenticated/admin.paths.$pathId'
 import { Route as AuthenticatedAdminProjectSubmissionIdRouteImport } from './routes/_authenticated/admin.project.$submissionId'
@@ -167,6 +169,18 @@ const AuthenticatedAdminCollegeCollegeIdRoute =
     path: '/college/$collegeId',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAdminMocksIndexRoute =
+  AuthenticatedAdminMocksIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedAdminMocksRoute,
+  } as any)
+const AuthenticatedAdminMocksTestIdRoute =
+  AuthenticatedAdminMocksTestIdRouteImport.update({
+    id: '/$testId',
+    path: '/$testId',
+    getParentRoute: () => AuthenticatedAdminMocksRoute,
+  } as any)
 const AuthenticatedAdminPathsIndexRoute =
   AuthenticatedAdminPathsIndexRouteImport.update({
     id: '/',
@@ -217,7 +231,7 @@ export interface FileRoutesByFullPath {
   '/college': typeof AuthenticatedCollegeRouteWithChildren
   '/student': typeof AuthenticatedStudentRouteWithChildren
   '/admin/colleges': typeof AuthenticatedAdminCollegesRoute
-  '/admin/mocks': typeof AuthenticatedAdminMocksRoute
+  '/admin/mocks': typeof AuthenticatedAdminMocksRouteWithChildren
   '/admin/paths': typeof AuthenticatedAdminPathsRouteWithChildren
   '/admin/students': typeof AuthenticatedAdminStudentsRoute
   '/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
@@ -233,19 +247,20 @@ export interface FileRoutesByFullPath {
   '/college/': typeof AuthenticatedCollegeIndexRoute
   '/student/': typeof AuthenticatedStudentIndexRoute
   '/admin/college/$collegeId': typeof AuthenticatedAdminCollegeCollegeIdRoute
+  '/admin/mocks/$testId': typeof AuthenticatedAdminMocksTestIdRoute
   '/admin/paths/$pathId': typeof AuthenticatedAdminPathsPathIdRoute
   '/admin/project/$submissionId': typeof AuthenticatedAdminProjectSubmissionIdRoute
   '/admin/student/$studentId': typeof AuthenticatedAdminStudentStudentIdRoute
   '/college/project/$submissionId': typeof AuthenticatedCollegeProjectSubmissionIdRoute
   '/college/student/$studentId': typeof AuthenticatedCollegeStudentStudentIdRoute
   '/student/week/$weekId': typeof AuthenticatedStudentWeekWeekIdRoute
+  '/admin/mocks/': typeof AuthenticatedAdminMocksIndexRoute
   '/admin/paths/': typeof AuthenticatedAdminPathsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/admin/colleges': typeof AuthenticatedAdminCollegesRoute
-  '/admin/mocks': typeof AuthenticatedAdminMocksRoute
   '/admin/students': typeof AuthenticatedAdminStudentsRoute
   '/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
   '/college/analytics': typeof AuthenticatedCollegeAnalyticsRoute
@@ -260,12 +275,14 @@ export interface FileRoutesByTo {
   '/college': typeof AuthenticatedCollegeIndexRoute
   '/student': typeof AuthenticatedStudentIndexRoute
   '/admin/college/$collegeId': typeof AuthenticatedAdminCollegeCollegeIdRoute
+  '/admin/mocks/$testId': typeof AuthenticatedAdminMocksTestIdRoute
   '/admin/paths/$pathId': typeof AuthenticatedAdminPathsPathIdRoute
   '/admin/project/$submissionId': typeof AuthenticatedAdminProjectSubmissionIdRoute
   '/admin/student/$studentId': typeof AuthenticatedAdminStudentStudentIdRoute
   '/college/project/$submissionId': typeof AuthenticatedCollegeProjectSubmissionIdRoute
   '/college/student/$studentId': typeof AuthenticatedCollegeStudentStudentIdRoute
   '/student/week/$weekId': typeof AuthenticatedStudentWeekWeekIdRoute
+  '/admin/mocks': typeof AuthenticatedAdminMocksIndexRoute
   '/admin/paths': typeof AuthenticatedAdminPathsIndexRoute
 }
 export interface FileRoutesById {
@@ -277,7 +294,7 @@ export interface FileRoutesById {
   '/_authenticated/college': typeof AuthenticatedCollegeRouteWithChildren
   '/_authenticated/student': typeof AuthenticatedStudentRouteWithChildren
   '/_authenticated/admin/colleges': typeof AuthenticatedAdminCollegesRoute
-  '/_authenticated/admin/mocks': typeof AuthenticatedAdminMocksRoute
+  '/_authenticated/admin/mocks': typeof AuthenticatedAdminMocksRouteWithChildren
   '/_authenticated/admin/paths': typeof AuthenticatedAdminPathsRouteWithChildren
   '/_authenticated/admin/students': typeof AuthenticatedAdminStudentsRoute
   '/_authenticated/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
@@ -293,12 +310,14 @@ export interface FileRoutesById {
   '/_authenticated/college/': typeof AuthenticatedCollegeIndexRoute
   '/_authenticated/student/': typeof AuthenticatedStudentIndexRoute
   '/_authenticated/admin/college/$collegeId': typeof AuthenticatedAdminCollegeCollegeIdRoute
+  '/_authenticated/admin/mocks/$testId': typeof AuthenticatedAdminMocksTestIdRoute
   '/_authenticated/admin/paths/$pathId': typeof AuthenticatedAdminPathsPathIdRoute
   '/_authenticated/admin/project/$submissionId': typeof AuthenticatedAdminProjectSubmissionIdRoute
   '/_authenticated/admin/student/$studentId': typeof AuthenticatedAdminStudentStudentIdRoute
   '/_authenticated/college/project/$submissionId': typeof AuthenticatedCollegeProjectSubmissionIdRoute
   '/_authenticated/college/student/$studentId': typeof AuthenticatedCollegeStudentStudentIdRoute
   '/_authenticated/student/week/$weekId': typeof AuthenticatedStudentWeekWeekIdRoute
+  '/_authenticated/admin/mocks/': typeof AuthenticatedAdminMocksIndexRoute
   '/_authenticated/admin/paths/': typeof AuthenticatedAdminPathsIndexRoute
 }
 export interface FileRouteTypes {
@@ -326,19 +345,20 @@ export interface FileRouteTypes {
     | '/college/'
     | '/student/'
     | '/admin/college/$collegeId'
+    | '/admin/mocks/$testId'
     | '/admin/paths/$pathId'
     | '/admin/project/$submissionId'
     | '/admin/student/$studentId'
     | '/college/project/$submissionId'
     | '/college/student/$studentId'
     | '/student/week/$weekId'
+    | '/admin/mocks/'
     | '/admin/paths/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/admin/colleges'
-    | '/admin/mocks'
     | '/admin/students'
     | '/admin/submissions'
     | '/college/analytics'
@@ -353,12 +373,14 @@ export interface FileRouteTypes {
     | '/college'
     | '/student'
     | '/admin/college/$collegeId'
+    | '/admin/mocks/$testId'
     | '/admin/paths/$pathId'
     | '/admin/project/$submissionId'
     | '/admin/student/$studentId'
     | '/college/project/$submissionId'
     | '/college/student/$studentId'
     | '/student/week/$weekId'
+    | '/admin/mocks'
     | '/admin/paths'
   id:
     | '__root__'
@@ -385,12 +407,14 @@ export interface FileRouteTypes {
     | '/_authenticated/college/'
     | '/_authenticated/student/'
     | '/_authenticated/admin/college/$collegeId'
+    | '/_authenticated/admin/mocks/$testId'
     | '/_authenticated/admin/paths/$pathId'
     | '/_authenticated/admin/project/$submissionId'
     | '/_authenticated/admin/student/$studentId'
     | '/_authenticated/college/project/$submissionId'
     | '/_authenticated/college/student/$studentId'
     | '/_authenticated/student/week/$weekId'
+    | '/_authenticated/admin/mocks/'
     | '/_authenticated/admin/paths/'
   fileRoutesById: FileRoutesById
 }
@@ -564,6 +588,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminCollegeCollegeIdRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/mocks/': {
+      id: '/_authenticated/admin/mocks/'
+      path: '/'
+      fullPath: '/admin/mocks/'
+      preLoaderRoute: typeof AuthenticatedAdminMocksIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminMocksRoute
+    }
+    '/_authenticated/admin/mocks/$testId': {
+      id: '/_authenticated/admin/mocks/$testId'
+      path: '/$testId'
+      fullPath: '/admin/mocks/$testId'
+      preLoaderRoute: typeof AuthenticatedAdminMocksTestIdRouteImport
+      parentRoute: typeof AuthenticatedAdminMocksRoute
+    }
     '/_authenticated/admin/paths/': {
       id: '/_authenticated/admin/paths/'
       path: '/'
@@ -616,6 +654,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedAdminMocksRouteChildren {
+  AuthenticatedAdminMocksTestIdRoute: typeof AuthenticatedAdminMocksTestIdRoute
+  AuthenticatedAdminMocksIndexRoute: typeof AuthenticatedAdminMocksIndexRoute
+}
+
+const AuthenticatedAdminMocksRouteChildren: AuthenticatedAdminMocksRouteChildren =
+  {
+    AuthenticatedAdminMocksTestIdRoute: AuthenticatedAdminMocksTestIdRoute,
+    AuthenticatedAdminMocksIndexRoute: AuthenticatedAdminMocksIndexRoute,
+  }
+
+const AuthenticatedAdminMocksRouteWithChildren =
+  AuthenticatedAdminMocksRoute._addFileChildren(
+    AuthenticatedAdminMocksRouteChildren,
+  )
+
 interface AuthenticatedAdminPathsRouteChildren {
   AuthenticatedAdminPathsPathIdRoute: typeof AuthenticatedAdminPathsPathIdRoute
   AuthenticatedAdminPathsIndexRoute: typeof AuthenticatedAdminPathsIndexRoute
@@ -634,7 +688,7 @@ const AuthenticatedAdminPathsRouteWithChildren =
 
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminCollegesRoute: typeof AuthenticatedAdminCollegesRoute
-  AuthenticatedAdminMocksRoute: typeof AuthenticatedAdminMocksRoute
+  AuthenticatedAdminMocksRoute: typeof AuthenticatedAdminMocksRouteWithChildren
   AuthenticatedAdminPathsRoute: typeof AuthenticatedAdminPathsRouteWithChildren
   AuthenticatedAdminStudentsRoute: typeof AuthenticatedAdminStudentsRoute
   AuthenticatedAdminSubmissionsRoute: typeof AuthenticatedAdminSubmissionsRoute
@@ -646,7 +700,7 @@ interface AuthenticatedAdminRouteChildren {
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminCollegesRoute: AuthenticatedAdminCollegesRoute,
-  AuthenticatedAdminMocksRoute: AuthenticatedAdminMocksRoute,
+  AuthenticatedAdminMocksRoute: AuthenticatedAdminMocksRouteWithChildren,
   AuthenticatedAdminPathsRoute: AuthenticatedAdminPathsRouteWithChildren,
   AuthenticatedAdminStudentsRoute: AuthenticatedAdminStudentsRoute,
   AuthenticatedAdminSubmissionsRoute: AuthenticatedAdminSubmissionsRoute,
@@ -730,3 +784,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
