@@ -159,6 +159,7 @@ function WeekView() {
       <PageHeader
         title={data?.week?.title ?? "Week"}
         description="Content published by StartSafe HQ. Complete each section to grow your readiness."
+        back="/student/path"
       />
 
       <div className="space-y-4">

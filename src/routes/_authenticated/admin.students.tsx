@@ -92,6 +92,7 @@ function AdminStudents() {
       <PageHeader
         title="Student database"
         description="Every student across every college, with drill-down into their full readiness profile."
+        back="/admin"
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
