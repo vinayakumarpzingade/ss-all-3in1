@@ -32,7 +32,11 @@ function AdminSubmissions() {
 
   return (
     <div>
-      <PageHeader title="Submissions" description="Everything students submit, platform wide." />
+      <PageHeader
+        title="Submissions"
+        description="Everything students submit, platform wide."
+        back="/admin"
+      />
       <div className="grid gap-4 lg:grid-cols-3">
         <div className="panel p-5">
           <h2 className="font-semibold">Projects</h2>

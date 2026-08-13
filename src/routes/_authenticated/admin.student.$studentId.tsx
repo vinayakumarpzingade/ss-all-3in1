@@ -10,7 +10,11 @@ function AdminStudentProfile() {
   const { studentId } = Route.useParams();
   return (
     <div>
-      <PageHeader title="Student intelligence" description="Full readiness profile across every module." />
+      <PageHeader
+        title="Student intelligence"
+        description="Full readiness profile across every module."
+        back="/admin/students"
+      />
       <StudentProfileView studentId={studentId} portal="admin" />
     </div>
   );

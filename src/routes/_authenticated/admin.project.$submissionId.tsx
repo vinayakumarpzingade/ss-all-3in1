@@ -10,7 +10,11 @@ function AdminProjectDetail() {
   const { submissionId } = Route.useParams();
   return (
     <div>
-      <PageHeader title="Project submission" description="Complete submission record with student context." />
+      <PageHeader
+        title="Project submission"
+        description="Complete submission record with student context."
+        back="/admin/submissions"
+      />
       <ProjectDetailView submissionId={submissionId} canReview portal="admin" />
     </div>
   );

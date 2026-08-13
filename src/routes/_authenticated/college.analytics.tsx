@@ -33,7 +33,11 @@ function CollegeAnalytics() {
 
   return (
     <div>
-      <PageHeader title="Analytics" description="Learning, coding and mock performance per student." />
+      <PageHeader
+        title="Analytics"
+        description="Learning, coding and mock performance per student."
+        back="/college"
+      />
       <div className="panel p-5">
         <div className="h-96">
           <ResponsiveContainer width="100%" height="100%">

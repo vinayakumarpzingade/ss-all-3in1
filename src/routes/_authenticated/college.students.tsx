@@ -65,7 +65,11 @@ function CollegeStudents() {
 
   return (
     <div>
-      <PageHeader title="Students" description="Only colleges can create student logins." />
+      <PageHeader
+        title="Students"
+        description="Only colleges can create student logins."
+        back="/college"
+      />
       <div className="grid gap-4 lg:grid-cols-3">
         <form
           className="panel space-y-3 p-5"
