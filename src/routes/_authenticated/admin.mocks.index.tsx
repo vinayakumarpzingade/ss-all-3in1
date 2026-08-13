@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { parseWeek } from "@/lib/week-parser";
 import { useRealtime } from "@/lib/use-auth";
 
-export const Route = createFileRoute("/_authenticated/admin/mocks")({
+export const Route = createFileRoute("/_authenticated/admin/mocks/")({
   component: AdminMocks,
 });
 
