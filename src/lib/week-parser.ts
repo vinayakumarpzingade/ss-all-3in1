@@ -1,9 +1,13 @@
+import { firstUrl } from "@/lib/video";
+
 // Parses a single pasted markdown block into structured week sections.
 // Used by the Admin week editor on Publish and by the demo seeder.
 
 export type SectionKind =
   | "objectives"
   | "cheat_sheet"
+  | "reading"
+  | "video"
   | "mcq"
   | "coding"
   | "mini_project"
@@ -33,6 +37,7 @@ export type ParsedWeek = {
     title: string;
     body: string;
     items: string[];
+    media_url: string | null;
     position: number;
   }[];
   mcqs: ParsedMcq[];
@@ -44,6 +49,8 @@ export type ParsedWeek = {
 const HEADINGS: { kind: SectionKind; label: string; match: RegExp }[] = [
   { kind: "objectives", label: "Objectives", match: /^(objectives?|learning objectives?|goals?)$/i },
   { kind: "cheat_sheet", label: "Cheat Sheet", match: /^(cheat ?sheet|notes|theory|summary)$/i },
+  { kind: "reading", label: "Reading Material", match: /^(reading|reading material|lesson|lesson notes?|study material)$/i },
+  { kind: "video", label: "Video Lesson", match: /^(video|videos|video lesson|video lecture|watch)$/i },
   { kind: "mcq", label: "MCQ Practice", match: /^(mcqs?|mcq practice|quiz|multiple choice.*)$/i },
   { kind: "coding", label: "Coding Practice", match: /^(coding|coding practice|coding problems?|programming practice)$/i },
   { kind: "mini_project", label: "Mini Project", match: /^(mini ?project|project)$/i },
@@ -120,6 +127,7 @@ export function parseWeek(raw: string, fallbackTitle = "Week"): ParsedWeek {
       title: block.label,
       body: text,
       items,
+      media_url: block.kind === "video" || block.kind === "resources" ? firstUrl(text) : null,
       position: index,
     });
   });
@@ -221,6 +229,8 @@ function parseCoding(lines: string[]): ParsedCoding[] {
 export const SECTION_LABELS: Record<SectionKind, string> = {
   objectives: "Objectives",
   cheat_sheet: "Cheat Sheet",
+  reading: "Reading Material",
+  video: "Video Lesson",
   mcq: "MCQ Practice",
   coding: "Coding Practice",
   mini_project: "Mini Project",

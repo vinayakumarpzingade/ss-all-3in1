@@ -159,43 +159,58 @@ export type Database = {
       coding_questions: {
         Row: {
           archived_at: string | null
+          constraints: string | null
           difficulty: string
+          examples: Json
           expected_output: string | null
           id: string
+          input_description: string | null
           language: string
+          output_description: string | null
           path_id: string | null
           points: number
           position: number
           prompt: string
           starter_code: string | null
+          test_cases: Json
           title: string
           week_id: string | null
         }
         Insert: {
           archived_at?: string | null
+          constraints?: string | null
           difficulty?: string
+          examples?: Json
           expected_output?: string | null
           id?: string
+          input_description?: string | null
           language?: string
+          output_description?: string | null
           path_id?: string | null
           points?: number
           position?: number
           prompt?: string
           starter_code?: string | null
+          test_cases?: Json
           title: string
           week_id?: string | null
         }
         Update: {
           archived_at?: string | null
+          constraints?: string | null
           difficulty?: string
+          examples?: Json
           expected_output?: string | null
           id?: string
+          input_description?: string | null
           language?: string
+          output_description?: string | null
           path_id?: string | null
           points?: number
           position?: number
           prompt?: string
           starter_code?: string | null
+          test_cases?: Json
           title?: string
           week_id?: string | null
         }
@@ -362,6 +377,7 @@ export type Database = {
           id: string
           is_active: boolean
           location: string | null
+          logo_url: string | null
           name: string
           officer_email: string | null
           officer_name: string | null
@@ -376,6 +392,7 @@ export type Database = {
           id?: string
           is_active?: boolean
           location?: string | null
+          logo_url?: string | null
           name: string
           officer_email?: string | null
           officer_name?: string | null
@@ -390,6 +407,7 @@ export type Database = {
           id?: string
           is_active?: boolean
           location?: string | null
+          logo_url?: string | null
           name?: string
           officer_email?: string | null
           officer_name?: string | null
@@ -701,6 +719,7 @@ export type Database = {
           max_attempts: number
           max_violations: number
           passing_marks: number | null
+          show_answers: boolean
           start_at: string | null
           target_course: string | null
           target_semester: number | null
@@ -720,6 +739,7 @@ export type Database = {
           max_attempts?: number
           max_violations?: number
           passing_marks?: number | null
+          show_answers?: boolean
           start_at?: string | null
           target_course?: string | null
           target_semester?: number | null
@@ -739,6 +759,7 @@ export type Database = {
           max_attempts?: number
           max_violations?: number
           passing_marks?: number | null
+          show_answers?: boolean
           start_at?: string | null
           target_course?: string | null
           target_semester?: number | null
@@ -876,65 +897,95 @@ export type Database = {
         Row: {
           archived_at: string | null
           college_id: string
+          completion_date: string | null
           created_at: string
+          custom_domain: string | null
           deadline: string | null
           demo_url: string | null
           description: string | null
           docs_url: string | null
+          domain: string | null
           file_url: string | null
           github_url: string | null
           id: string
+          image_url: string | null
+          is_personal: boolean
           name: string
           objectives: string | null
           project_id: string | null
+          project_type: string
           review_note: string | null
           reviewed_at: string | null
           score: number | null
+          secondary_domain: string | null
+          start_date: string | null
           status: string
           student_id: string
+          team_members: Json
           tech_stack: string | null
+          updated_at: string
         }
         Insert: {
           archived_at?: string | null
           college_id: string
+          completion_date?: string | null
           created_at?: string
+          custom_domain?: string | null
           deadline?: string | null
           demo_url?: string | null
           description?: string | null
           docs_url?: string | null
+          domain?: string | null
           file_url?: string | null
           github_url?: string | null
           id?: string
+          image_url?: string | null
+          is_personal?: boolean
           name: string
           objectives?: string | null
           project_id?: string | null
+          project_type?: string
           review_note?: string | null
           reviewed_at?: string | null
           score?: number | null
+          secondary_domain?: string | null
+          start_date?: string | null
           status?: string
           student_id: string
+          team_members?: Json
           tech_stack?: string | null
+          updated_at?: string
         }
         Update: {
           archived_at?: string | null
           college_id?: string
+          completion_date?: string | null
           created_at?: string
+          custom_domain?: string | null
           deadline?: string | null
           demo_url?: string | null
           description?: string | null
           docs_url?: string | null
+          domain?: string | null
           file_url?: string | null
           github_url?: string | null
           id?: string
+          image_url?: string | null
+          is_personal?: boolean
           name?: string
           objectives?: string | null
           project_id?: string | null
+          project_type?: string
           review_note?: string | null
           reviewed_at?: string | null
           score?: number | null
+          secondary_domain?: string | null
+          start_date?: string | null
           status?: string
           student_id?: string
+          team_members?: Json
           tech_stack?: string | null
+          updated_at?: string
         }
         Relationships: [
           {
@@ -965,6 +1016,7 @@ export type Database = {
           archived_at: string | null
           brief: string | null
           created_at: string
+          due_at: string | null
           id: string
           title: string
           week_id: string | null
@@ -973,6 +1025,7 @@ export type Database = {
           archived_at?: string | null
           brief?: string | null
           created_at?: string
+          due_at?: string | null
           id?: string
           title: string
           week_id?: string | null
@@ -981,6 +1034,7 @@ export type Database = {
           archived_at?: string | null
           brief?: string | null
           created_at?: string
+          due_at?: string | null
           id?: string
           title?: string
           week_id?: string | null
@@ -1004,6 +1058,7 @@ export type Database = {
           created_at: string
           department: string
           email: string
+          gender: string | null
           id: string
           learning_progress: number
           mock_score: number
@@ -1022,6 +1077,7 @@ export type Database = {
           created_at?: string
           department?: string
           email: string
+          gender?: string | null
           id?: string
           learning_progress?: number
           mock_score?: number
@@ -1040,6 +1096,7 @@ export type Database = {
           created_at?: string
           department?: string
           email?: string
+          gender?: string | null
           id?: string
           learning_progress?: number
           mock_score?: number
@@ -1089,8 +1146,10 @@ export type Database = {
         Row: {
           body: string
           id: string
+          is_required: boolean
           items: Json
           kind: Database["public"]["Enums"]["section_kind"]
+          media_url: string | null
           position: number
           title: string
           week_id: string
@@ -1098,8 +1157,10 @@ export type Database = {
         Insert: {
           body?: string
           id?: string
+          is_required?: boolean
           items?: Json
           kind: Database["public"]["Enums"]["section_kind"]
+          media_url?: string | null
           position?: number
           title?: string
           week_id: string
@@ -1107,8 +1168,10 @@ export type Database = {
         Update: {
           body?: string
           id?: string
+          is_required?: boolean
           items?: Json
           kind?: Database["public"]["Enums"]["section_kind"]
+          media_url?: string | null
           position?: number
           title?: string
           week_id?: string
@@ -1184,8 +1247,20 @@ export type Database = {
         Returns: boolean
       }
       is_admin: { Args: never; Returns: boolean }
+      is_week_complete: {
+        Args: { _student_id: string; _week_id: string }
+        Returns: boolean
+      }
+      is_week_unlocked: {
+        Args: { _student_id: string; _week_id: string }
+        Returns: boolean
+      }
       my_college_id: { Args: never; Returns: string }
       my_student_id: { Args: never; Returns: string }
+      week_required_kinds: {
+        Args: { _week_id: string }
+        Returns: Database["public"]["Enums"]["section_kind"][]
+      }
     }
     Enums: {
       app_role: "super_admin" | "college" | "student"
@@ -1198,6 +1273,8 @@ export type Database = {
         | "assignment"
         | "resources"
         | "interview"
+        | "reading"
+        | "video"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1335,6 +1412,8 @@ export const Constants = {
         "assignment",
         "resources",
         "interview",
+        "reading",
+        "video",
       ],
     },
   },
