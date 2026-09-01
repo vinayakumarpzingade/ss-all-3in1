@@ -1,0 +1,6 @@
+- [ ] Guided student week experience with guarded sequence, video completion, and MCQ learning feedback
+- [ ] Learning path progress and strict frontend week access
+- [ ] Personal project CRUD with domain/team/image fields
+- [ ] Mock history and answer review respecting show_answers
+- [ ] College import validation, at-risk dashboard, and branded PDF reports
+- [ ] Verify build and pilot flows
