@@ -68,3 +68,61 @@ export function formatDate(value: string | null | undefined) {
 }
 
 export const RISK_THRESHOLD = 40;
+
+export type RiskActivity = {
+  at: string | null | undefined;
+  label: string;
+};
+
+export type RiskStudentInput = {
+  placementReadiness: number;
+  now?: Date;
+  requiredPending?: string[];
+  overduePending?: string[];
+  activity?: RiskActivity[];
+  inactivityDays?: number;
+};
+
+export type RiskStatus = {
+  atRisk: boolean;
+  reasons: string[];
+  pendingActivity: string[];
+  lastActivity: string | null;
+};
+
+/**
+ * Produces the college-facing risk state from persisted learning activity.
+ * This is deliberately deterministic so realtime refetches recalculate it.
+ */
+export function calculateAtRiskStatus(input: RiskStudentInput): RiskStatus {
+  const now = input.now ?? new Date();
+  const inactivityDays = input.inactivityDays ?? 14;
+  const validActivity = (input.activity ?? []).filter((item) => item.at);
+  const lastActivity = validActivity
+    .map((item) => item.at as string)
+    .sort((a, b) => Date.parse(b) - Date.parse(a))[0] ?? null;
+  const reasons: string[] = [];
+  const pendingActivity = [...(input.requiredPending ?? [])];
+
+  if (input.overduePending?.length) {
+    reasons.push("Overdue required activity");
+    pendingActivity.push(...input.overduePending);
+  } else if (input.requiredPending?.length) {
+    reasons.push("Required learning activity incomplete");
+  }
+
+  if (!lastActivity || now.getTime() - Date.parse(lastActivity) > inactivityDays * 86400000) {
+    reasons.push(`No activity in ${inactivityDays} days`);
+  }
+
+  if (input.placementReadiness < RISK_THRESHOLD) {
+    reasons.push(`Readiness below ${RISK_THRESHOLD}%`);
+  }
+
+  return {
+    atRisk: reasons.length > 0,
+    reasons: [...new Set(reasons)],
+    pendingActivity: [...new Set(pendingActivity)],
+    lastActivity,
+  };
+}
