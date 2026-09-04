@@ -511,6 +511,68 @@ export type Database = {
         }
         Relationships: []
       }
+      mcq_attempts: {
+        Row: {
+          college_id: string
+          correct: boolean
+          created_at: string
+          id: string
+          question_id: string
+          selected_index: number | null
+          student_id: string
+          week_id: string
+        }
+        Insert: {
+          college_id: string
+          correct?: boolean
+          created_at?: string
+          id?: string
+          question_id: string
+          selected_index?: number | null
+          student_id: string
+          week_id: string
+        }
+        Update: {
+          college_id?: string
+          correct?: boolean
+          created_at?: string
+          id?: string
+          question_id?: string
+          selected_index?: number | null
+          student_id?: string
+          week_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mcq_attempts_college_id_fkey"
+            columns: ["college_id"]
+            isOneToOne: false
+            referencedRelation: "colleges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mcq_attempts_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "mcqs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mcq_attempts_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mcq_attempts_week_id_fkey"
+            columns: ["week_id"]
+            isOneToOne: false
+            referencedRelation: "weeks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       mcqs: {
         Row: {
           archived_at: string | null
