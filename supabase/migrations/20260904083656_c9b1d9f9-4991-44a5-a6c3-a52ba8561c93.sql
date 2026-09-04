@@ -1,0 +1,12 @@
+REVOKE EXECUTE ON FUNCTION public.build_college_code(text, text) FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.colleges_code_guard() FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.enforce_attempt_limit() FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.enforce_week_unlock() FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.has_role(uuid, public.app_role) FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.is_admin() FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.is_week_complete(uuid, uuid) FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.is_week_unlocked(uuid, uuid) FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.my_college_id() FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.my_student_id() FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.recalc_student_stats() FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.week_required_kinds(uuid) FROM PUBLIC, anon, authenticated;
